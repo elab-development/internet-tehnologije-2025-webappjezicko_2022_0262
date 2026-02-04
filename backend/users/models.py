@@ -80,3 +80,51 @@ class AdminUser(models.Model):
 
     def __str__(self):
         return f"Admin user: {self.user.user_name}"
+
+#Potrebno je kasnije da se proveri da li su modeli skroz okej, mozda budu morali malo i da se isprave neki
+
+class Lesson(models.Model):
+    lesson_name = models.CharField(max_length=120)
+    date_created = models.DateField()
+    total_XP = models.FloatField()
+    exercise_num = models.IntegerField()
+
+    def __str__(self):
+        return self.lesson_name
+    
+class LessonEnrollement(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="enrollments"
+    )
+    lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.CASCADE,
+        related_name="enrollments"
+    )
+
+    start_date = models.DateField()
+    end_date = models.DateField()
+    status = models.CharField(max_length=120)
+    earned_XP = models.FloatField()
+
+    class Meta:
+        unique_together = ('user', 'lesson')
+
+    def __str__(self):
+        return f"{self.user} -> {self.lesson}"
+
+class TaskType(models.Model):
+    name = models.CharField(max_length=120)
+    description = models.TextField()
+    xp_amount = models.FloatField()
+
+class Task(models.Model):
+    sequence_number = models.IntegerField()
+    task_description = models.CharField(max_length=120)
+    audio = models.BooleanField()
+    xp_amount = models.FloatField()
+
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    task_type = models.ForeignKey(TaskType, on_delete=models.PROTECT)

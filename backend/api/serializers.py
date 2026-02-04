@@ -1,4 +1,4 @@
-from users.models import User, RegularUser, PremiumUser
+from users.models import User, RegularUser, PremiumUser, Lesson, LessonEnrollement
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -21,3 +21,16 @@ class UserSerializer(serializers.ModelSerializer):
     
 class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'email'
+
+#Mora da se doradi malo
+class LessonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = ["id", "lesson_name", "exercise_num", "date_created", "total_XP"]
+
+class LessonEnrollmentSerializer(serializers.ModelSerializer):
+    lesson_name = serializers.CharField(source="lesson.lesson_name")
+
+    class Meta:
+        model = LessonEnrollement
+        fields = ["lesson_name", "status", "start_date"] 

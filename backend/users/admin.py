@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, RegularUser, PremiumUser, AdminUser
+from .models import User, RegularUser, PremiumUser, AdminUser, Lesson, LessonEnrollement
 
 #ZA DORADU, TREBA DA SE SREDI JOS, MORA DA SE KREIRANJE I BRISANJE NEKAKO MALO SREDE NA ADMIN PANELU 
 
@@ -50,11 +50,18 @@ class UserAdmin(BaseUserAdmin):
             inlines.append(AdminUserInline(self.model, self.admin_site))
         
         return inlines
+    
+class LessonEnrollmentAdmin(admin.ModelAdmin):
+    list_display = ("user", "lesson", "status", "started_at")
+    search_fields = ("user__email", "lesson__lesson_name")
+    list_filter = ("status",)
 
 admin.site.register(User, UserAdmin)
 admin.site.register(RegularUser)
 admin.site.register(PremiumUser)
 admin.site.register(AdminUser)
+admin.site.register(Lesson)
+admin.site.register(LessonEnrollement)
 
 
 # Register your models here.
