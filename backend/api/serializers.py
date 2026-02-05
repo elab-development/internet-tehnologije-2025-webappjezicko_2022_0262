@@ -34,3 +34,9 @@ class LessonEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonEnrollement
         fields = ["lesson_name", "status", "start_date"] 
+
+class CreateEnrollmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonEnrollement
+        fields = ["id", "lesson", "status", "start_date"]
+        read_only_fields = ["status", "start_date"]

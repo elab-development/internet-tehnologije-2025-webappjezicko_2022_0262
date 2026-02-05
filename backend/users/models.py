@@ -104,10 +104,10 @@ class LessonEnrollement(models.Model):
         related_name="enrollments"
     )
 
-    start_date = models.DateField()
-    end_date = models.DateField()
-    status = models.CharField(max_length=120)
-    earned_XP = models.FloatField()
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(null=True)
+    status = models.CharField(max_length=120, default="started")
+    earned_XP = models.FloatField(null=True, default=0)
 
     class Meta:
         unique_together = ('user', 'lesson')
