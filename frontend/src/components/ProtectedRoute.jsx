@@ -31,14 +31,19 @@ function ProtectedRoute({children}) {
             setIsAuthorized(false)
             return
         }
-        const decoded = jwtDecode(token)
-        const tokenExpiration = decoded.exp
-        const now = Date.now() / 1000
-
-        if (tokenExpiration < now) {
-            await refreshToken()
-        } else {
-            setIsAuthorized(true)
+        try {
+            const decoded = jwtDecode(token);
+            const tokenExpiration = decoded.exp;
+            const now = Date.now() / 1000;
+    
+            if (tokenExpiration < now) {
+                await refreshToken();
+            } else {
+                setIsAuthorized(true);
+            }
+        } catch (error) {
+            console.log("JWT Decode failed:", error);
+            setIsAuthorized(false);
         }
     }
 
