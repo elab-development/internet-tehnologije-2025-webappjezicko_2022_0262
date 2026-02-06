@@ -1,0 +1,47 @@
+.navbar-wrap {
+    border-bottom: 1px solid #eee;
+    background: #fff;
+  }
+  
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+  }
+  
+  .navbar-brand {
+    font-weight: 700;
+    text-decoration: none;
+    color: #111;
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .navbar-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar-search {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+  
+  .navbar-input {
+    padding: 6px 10px;
+  }
+  
+  .navbar-btn {
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  
+  .navbar-actions {
+    display: flex;
+    gap: 8px;
+  }
