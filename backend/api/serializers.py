@@ -30,10 +30,11 @@ class LessonSerializer(serializers.ModelSerializer):
 
 class LessonEnrollmentSerializer(serializers.ModelSerializer):
     lesson_name = serializers.CharField(source="lesson.lesson_name")
-
+    earned_XP = serializers.FloatField()
+    
     class Meta:
         model = LessonEnrollement
-        fields = ["lesson_name", "status", "start_date"] 
+        fields = ["lesson_name", "earned_XP"] 
 
 class CreateEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:

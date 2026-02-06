@@ -1,11 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import api from "../api";
+import "../styles/Lesson.css"
 
 function Home() {
   const navigate = useNavigate();
 
+  // Home by DEFAULT -> return my-lectures for logged user
+
+  const [lessons, setLessons] = useState([]);
+
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const res = await api.get("/api/user/my-lessons/", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+          },
+        });
+        setLessons(res.data); // array of lessons
+      } catch (err) {
+        console.error("Failed to fetch lessons:", err);
+      }
+    };
+
+    fetchLessons();
+  }, []);
+
+  // NavBar implementation
   const links = [
     { to: "/", label: "Home" },
     { to: "/lessons", label: "Lessons" },
@@ -38,9 +62,19 @@ function Home() {
 
       <main>
         <h1>Welcome to Jezičko!</h1>
+
+        <section className="lessons-container">
+          {lessons.map((lesson, idx) => (
+            <div key={idx} className="lesson-card">
+              <h3>{lesson.lesson_name}</h3>
+              <p>XP: {lesson.earned_XP}</p>
+            </div>
+          ))}
+        </section>
       </main>
     </div>
   );
+
 }
 
 export default Home;

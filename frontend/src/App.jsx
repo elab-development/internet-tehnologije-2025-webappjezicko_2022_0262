@@ -5,6 +5,7 @@ import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
+import Profile from "./pages/Profile"
 
 function Logout(){
   localStorage.clear();
@@ -40,6 +41,14 @@ function App() {
         />
         <Route
           path="*" element={<NotFound/>}
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </BrowserRouter>
