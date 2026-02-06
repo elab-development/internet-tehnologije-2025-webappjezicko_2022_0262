@@ -7,9 +7,6 @@ import "../styles/Lesson.css"
 
 function Home() {
   const navigate = useNavigate();
-
-  // Home by DEFAULT -> return my-lectures for logged user
-
   const [lessons, setLessons] = useState([]);
 
   useEffect(() => {
@@ -20,7 +17,7 @@ function Home() {
             Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
           },
         });
-        setLessons(res.data); // array of lessons
+        setLessons(res.data); 
       } catch (err) {
         console.error("Failed to fetch lessons:", err);
       }
@@ -31,8 +28,8 @@ function Home() {
 
   // NavBar implementation
   const links = [
-    { to: "/", label: "Home" },
-    { to: "/lessons", label: "Lessons" },
+    { to: "/", label: "Lessons" },
+    { to: "/lessons", label: "Available Lessons" },
     { to: "/profile", label: "Profile" },
   ];
 

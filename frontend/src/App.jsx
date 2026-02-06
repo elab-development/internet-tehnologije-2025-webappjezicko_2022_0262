@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Profile from "./pages/Profile"
+import Lessons from "./pages/Lessons"
 
 function Logout(){
   localStorage.clear();
@@ -47,6 +48,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lessons"
+          element={
+            <ProtectedRoute>
+              <Lessons />
             </ProtectedRoute>
           }
         />

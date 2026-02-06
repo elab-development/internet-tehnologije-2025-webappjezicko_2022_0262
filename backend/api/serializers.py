@@ -22,7 +22,6 @@ class UserSerializer(serializers.ModelSerializer):
 class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'email'
 
-#Mora da se doradi malo
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson

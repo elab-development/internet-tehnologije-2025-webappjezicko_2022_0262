@@ -7,7 +7,7 @@ from .serializers import *
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .permissions import IsAdminUser
-
+from django.shortcuts import get_object_or_404
 
 class CurrentUserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -29,15 +29,34 @@ class LessonListView(generics.ListAPIView):
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated]
 
-    filter_backends = [filters.SearchFilter]
-    search_fields = ["lesson_name"]
-
 class EnrollLessonView(generics.CreateAPIView):
     serializer_class = CreateEnrollmentSerializer
     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def create(self, request, *args, **kwargs):
+        lesson_id = request.data.get("id")
+
+        if not lesson_id:
+            return Response(
+                {"error": "lesson_id is required"},
+                status=400
+            )
+
+        lesson = get_object_or_404(Lesson, id=lesson_id)
+
+        enrollment, created = LessonEnrollement.objects.get_or_create(
+            user=request.user,
+            lesson=lesson
+        )
+
+        if not created:
+            return Response(
+                {"error": "Already enrolled"},
+                status=400
+            )
+
+        serializer = self.get_serializer(enrollment)
+        return Response(serializer.data, status=201)
 
 class LessonListCreateView(generics.ListCreateAPIView):
     queryset = Lesson.objects.all()
