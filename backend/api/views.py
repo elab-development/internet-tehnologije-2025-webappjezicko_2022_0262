@@ -25,9 +25,17 @@ class EmailTokenObtainPairView(TokenObtainPairView):
     serializer_class = EmailTokenObtainPairSerializer
 
 class LessonListView(generics.ListAPIView):
-    queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        enrolled_lessons = LessonEnrollement.objects.filter(
+            user = user
+        ).values_list("lesson_id", flat=True)
+
+        return Lesson.objects.exclude(id__in=enrolled_lessons)
 
 class EnrollLessonView(generics.CreateAPIView):
     serializer_class = CreateEnrollmentSerializer
