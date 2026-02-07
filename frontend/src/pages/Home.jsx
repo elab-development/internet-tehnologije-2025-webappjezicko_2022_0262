@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import api from "../api";
 import "../styles/Lesson.css"
+import "../styles/NavBar.css"
 
 function Home() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ function Home() {
 
   const token = localStorage.getItem(ACCESS_TOKEN);
   const actions = token ? (
-    <button onClick={handleLogout}>Logout</button>
+    <button onClick={handleLogout} className="navbar-btn">Logout</button>
   ) : (
     <>
       <button onClick={() => navigate("/login")}>Login</button>
@@ -58,13 +59,14 @@ function Home() {
       <NavBar brand="Jezičko" links={links} onSearch={handleSearch} actions={actions} />
 
       <main>
-        <h1>Welcome to Jezičko!</h1>
+        <h1 className="heading">Welcome to Jezičko!</h1>
 
         <section className="lessons-container">
           {lessons.map((lesson, idx) => (
             <div key={idx} className="lesson-card">
               <h3>{lesson.lesson_name}</h3>
               <p>XP: {lesson.earned_XP}</p>
+              
             </div>
           ))}
         </section>

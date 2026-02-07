@@ -14,16 +14,17 @@
     width: 90%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(165, 165, 165);
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: rgb(230, 230, 230);
   }
   
   .form-button {
-    width: 95%;
+    width: 75%;
     padding: 10px;
-    margin: 20px 0;
-    background-color: #007bff;
+    margin: 5px;
+    background-color: #54cc04;
     color: white;
     border: none;
     border-radius: 4px;
@@ -32,5 +33,25 @@
   }
   
   .form-button:hover {
-    background-color: #0056b3;
+    background-color: #54cc049d;
+  }
+
+  .form-button-register {
+    width: 75%;
+    padding: 10px;
+    margin: 15px;
+    background-color: #54cc04;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .form-button-register:hover {
+    background-color: #54cc049d;
+  }
+
+  .register-link {
+    color: #327c00;;
   }

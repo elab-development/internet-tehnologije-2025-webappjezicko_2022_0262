@@ -3,6 +3,7 @@ import api from "../api"
 import { useNavigate } from "react-router-dom"
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
 import "../styles/Form.css"
+import { Link } from "react-router-dom";
 
 function Form({ route, method }) {
     const [email, setEmail] = useState("")
@@ -51,6 +52,12 @@ function Form({ route, method }) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
         />
+        <p>
+            Don't have an account?{" "}
+            <Link to="/register" className="register-link">
+                Register here!
+            </Link>
+        </p>
         <button className="form-button" type="submit">
             {name}
         </button>

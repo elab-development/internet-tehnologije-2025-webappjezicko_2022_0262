@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import "../styles/Form.css";
+import { Link } from "react-router-dom";
 
 function RegisterForm() {
   const [name, setName] = useState("");
@@ -74,15 +75,6 @@ function RegisterForm() {
 
       <input
         className="form-input"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-
-      <input
-        className="form-input"
         type="date"
         value={birthDate}
         onChange={(e) => setBirthDate(e.target.value)}
@@ -101,6 +93,15 @@ function RegisterForm() {
 
       <input
         className="form-input"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        required
+      />
+
+      <input
+        className="form-input"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -108,7 +109,14 @@ function RegisterForm() {
         required
       />
 
-      <button className="form-button" type="submit" disabled={loading}>
+      <p>
+        Back to login? {" "}
+        <Link to="/login" className="register-link">
+          Take me there
+        </Link>
+      </p>
+
+      <button className="form-button-register" type="submit" disabled={loading}>
         {loading ? "Registering..." : "Register"}
       </button>
     </form>

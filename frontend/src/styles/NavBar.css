@@ -1,47 +1,70 @@
 .navbar-wrap {
-    border-bottom: 1px solid #eee;
-    background: #41bd3c;
-  }
-  
-  .navbar-inner {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-  }
-  
-  .navbar-brand {
-    font-weight: 700;
-    text-decoration: none;
-    color: #111;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 12px;
-  }
-  
-  .navbar-link {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .navbar-search {
-    display: flex;
-    gap: 8px;
-    margin-left: auto;
-  }
-  
-  .navbar-input {
-    padding: 6px 10px;
-  }
-  
-  .navbar-btn {
-    padding: 6px 10px;
-    cursor: pointer;
-  }
-  
-  .navbar-actions {
-    display: flex;
-    gap: 8px;
-  }
+  border-bottom: 1px solid #54cc04;
+  background: #54cc04;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  font-size: 25px;
+}
+
+.navbar-brand {
+  font-weight: 900;
+  text-decoration: none;
+  color: #0e0c14;
+  padding-right: 100px;
+  font-style: oblique;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 75px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.navbar-search {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  color: #54cc04;
+}
+
+.navbar-input {
+  padding: 6px 10px;
+  background-color: #0e0c14;
+  border-radius: 10px 10px;
+  color: #54cc04;
+  font-weight: 900;
+  font-style: oblique;
+}
+
+.navbar-input:focus {
+  padding: 6px 10px;
+  background-color: #0e0c14;
+  border-radius: 10px 10px;
+  color: #54cc04;
+  font-weight: 900;
+  outline: none;                 
+  border-color: #54cc04; 
+}
+
+.navbar-btn {
+  padding: 6px 10px;
+  cursor: pointer;
+  background-color: #0e0c14;
+  border-radius: 50px 20px;
+  color: #54cc04;
+  font-weight: 900;
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 8px;
+}

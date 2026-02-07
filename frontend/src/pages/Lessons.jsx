@@ -29,7 +29,7 @@ function Lessons() {
       localStorage.removeItem(ACCESS_TOKEN);
       localStorage.removeItem(REFRESH_TOKEN);
       navigate("/login");
-    }}>Logout</button>
+    }} className="navbar-btn">Logout</button>
   ) : (
     <>
       <button onClick={() => navigate("/login")}>Login</button>
@@ -75,22 +75,17 @@ function Lessons() {
   return (
     <div>
       <NavBar brand="Jezičko" links={links} onSearch={handleSearch} actions={actions} />
-
-      <main style={{ padding: "20px" }}>
-        <h1>Available Lessons</h1>
-
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+  
+      <main>
+        <h1 className="heading">Available Lessons</h1>
+  
+        <section className="lessons-container">
           {lessons.length === 0 && <p>No lessons available.</p>}
-
+  
           {lessons.map((lesson) => (
             <div
               key={lesson.id}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                padding: "12px",
-                width: "200px",
-              }}
+              className="lesson-card"
             >
               <h3>{lesson.lesson_name}</h3>
               <p>Start: {lesson.date_created}</p>
@@ -98,12 +93,13 @@ function Lessons() {
               <button
                 onClick={() => handleEnroll(lesson.id)}
                 disabled={enrolledIds.includes(lesson.id)}
+                className="enroll-button"
               >
                 {enrolledIds.includes(lesson.id) ? "Enrolled" : "Enroll"}
               </button>
             </div>
           ))}
-        </div>
+        </section>
       </main>
     </div>
   );
