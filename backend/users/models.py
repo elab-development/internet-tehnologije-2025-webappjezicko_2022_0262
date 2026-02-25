@@ -81,8 +81,6 @@ class AdminUser(models.Model):
     def __str__(self):
         return f"Admin user: {self.user.user_name}"
 
-#Potrebno je kasnije da se proveri da li su modeli skroz okej, mozda budu morali malo i da se isprave neki
-
 class Lesson(models.Model):
     lesson_name = models.CharField(max_length=120)
     date_created = models.DateField()

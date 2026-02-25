@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Profile from "./pages/Profile"
 import Lessons from "./pages/Lessons"
+import Admin from "./pages/Admin"
+import Details from "./pages/LessonDetails"
 
 function Logout(){
   localStorage.clear();
@@ -24,13 +26,18 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route 
-          path="/"
-          element={
+          path="/" element={
             <ProtectedRoute>
               <Home />
-            </ProtectedRoute>
-          }
+            </ProtectedRoute>}
         />
+        <Route
+          path="/admin" element={
+          <ProtectedRoute>
+            <Admin/>
+          </ProtectedRoute>}
+        />
+        <Route path="/lessons/:id" element={<Details />} /> 
         <Route
           path="/login" element={<Login />}
         />

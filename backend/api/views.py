@@ -83,3 +83,25 @@ class LessonEnrollmentView(generics.ListAPIView):
     def get_queryset(self):
         return LessonEnrollement.objects.filter(user=self.request.user)
     
+
+class TaskListCreateView(generics.ListCreateAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    
+    def get_queryset(self):
+        lesson_id = self.kwargs["pk"]
+        return Task.objects.filter(lesson=lesson_id)
+    
+    def perform_create(self, serializer):
+        lesson_id = self.kwargs["pk"]
+        lesson = Lesson.objects.get(id=lesson_id)
+        serializer.save(lesson=lesson)
+
+class TaskUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    
+    def get_queryset(self):
+        lesson_id = self.kwargs["lesson_pk"]
+        return Task.objects.filter(lesson=lesson_id)
+    

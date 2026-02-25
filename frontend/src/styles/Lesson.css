@@ -23,6 +23,28 @@
     font-size: x-large;
 }
 
+.lesson-details {
+  width: 600px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.lesson-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 15px 20px;
+  align-items: center;
+}
+
+.lesson-details-input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
 .heading {
     margin-bottom: 50px;
     margin-top: 50px;
@@ -37,4 +59,15 @@
   background-color: #0e0c14;
   width: 150px;
   font-weight: 900;
+}
+
+.detail-button{
+  display: relative;
+  cursor: pointer;
+  border-radius: 20px 20px;
+  color: #54cc04;
+  background-color: #0e0c14;
+  width: 150px;
+  font-weight: 900;
+  justify-content: space-between;
 }

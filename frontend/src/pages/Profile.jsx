@@ -9,12 +9,6 @@ function Profile() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const links = [
-    { to: "/", label: "Lessons" },
-    { to: "/lessons", label: "Available Lessons" },
-    { to: "/profile", label: "Profile" },
-  ];
-
   const handleSearch = (query) => {
     console.log("Searching for:", query);
   };
@@ -49,6 +43,23 @@ function Profile() {
   }, []);
 
   if (!user) return <div>Loading profile...</div>;
+  
+  let links = [];
+  
+  if (user.user_type === "admin") {
+  links = [
+    { to: "/admin", label: "Lessons" },
+    { to: "/profile", label: "Profile" },
+  ];
+  }
+  else {
+    links = [
+    { to: "/", label: "Lessons" },
+    { to: "/lessons", label: "Available Lessons" },
+    { to: "/profile", label: "Profile" },
+  ];
+  }
+
 
   return (
     <div>

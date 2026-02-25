@@ -21,7 +21,15 @@ function Form({ route, method }) {
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/")
+
+                const userType = res.data.user_type;
+
+                if (userType === "admin") {
+                    navigate("/admin")
+                }
+                else {
+                  navigate("/")  
+                }
             } else {
                 navigate("/login")
             }

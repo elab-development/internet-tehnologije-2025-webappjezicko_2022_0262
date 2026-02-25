@@ -47,12 +47,7 @@ function Home() {
   const token = localStorage.getItem(ACCESS_TOKEN);
   const actions = token ? (
     <button onClick={handleLogout} className="navbar-btn">Logout</button>
-  ) : (
-    <>
-      <button onClick={() => navigate("/login")}>Login</button>
-      <button onClick={() => navigate("/register")}>Register</button>
-    </>
-  );
+  ) : null;
 
   return (
     <div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, RegularUser, PremiumUser, AdminUser, Lesson, LessonEnrollement
+from .models import *
 
 #ZA DORADU, TREBA DA SE SREDI JOS, MORA DA SE KREIRANJE I BRISANJE NEKAKO MALO SREDE NA ADMIN PANELU 
 
@@ -62,6 +62,8 @@ admin.site.register(PremiumUser)
 admin.site.register(AdminUser)
 admin.site.register(Lesson)
 admin.site.register(LessonEnrollement)
+admin.site.register(Task)
+admin.site.register(TaskType)
 
 
 # Register your models here.
