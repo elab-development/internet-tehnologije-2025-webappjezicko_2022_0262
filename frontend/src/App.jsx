@@ -9,6 +9,7 @@ import Profile from "./pages/Profile"
 import Lessons from "./pages/Lessons"
 import Admin from "./pages/Admin"
 import Details from "./pages/LessonDetails"
+import ProbaTTS from "./pages/ProbaTTS"
 
 function Logout(){
   localStorage.clear();
@@ -44,6 +45,9 @@ function App() {
         <Route
           path="/logout" element={<Logout />}
         />
+        <Route
+          path="/proba" element={<ProbaTTS/>}
+          />
         <Route
           path="/register" element={<Register />}
         />

@@ -13,26 +13,25 @@ function Profile() {
     console.log("Searching for:", query);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(REFRESH_TOKEN);
-    navigate("/login");
+  const handleLogout = async () => {
+  try {
+    await api.post("/api/logout/");
+  } catch (err) {
+    console.log(err);
+  }
+  navigate("/login");
   };
 
-  const token = localStorage.getItem(ACCESS_TOKEN);
-  const actions = token ? (
-    <button onClick={handleLogout} className="navbar-btn">Logout</button>
-  ) : (
-    <>
-      <button onClick={() => navigate("/login")}>Login</button>
-      <button onClick={() => navigate("/register")}>Register</button>
-    </>
+  const actions = (
+  <button onClick={handleLogout} className="navbar-btn">
+    Logout
+  </button>
   );
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get("/api/user/me/"); // we’ll create this endpoint next
+        const res = await api.get("http://localhost:8000/api/user/me/"); // we’ll create this endpoint next
         setUser(res.data);
       } catch (err) {
         console.error("Failed to fetch user info:", err);

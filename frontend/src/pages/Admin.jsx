@@ -20,11 +20,7 @@ function Admin() {
 
   const fetchAllLessons = async () => {
       try {
-        const res = await api.get("/api/adminpanel/lessons/", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-          },
-        });
+        const res = await api.get("/api/adminpanel/lessons/");
         setAllLessons(res.data); 
       } catch (err) {
         console.error("Failed to fetch lessons:", err);
@@ -45,10 +41,13 @@ function Admin() {
     console.log("Searching for:", query);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(REFRESH_TOKEN);
-    navigate("/login");
+  const handleLogout = async () => {
+  try {
+    await api.post("/api/logout/");
+  } catch (err) {
+    console.log(err);
+  }
+  navigate("/login");
   };
 
   const handleAdd = async (lesson) => {
@@ -65,10 +64,11 @@ function Admin() {
     setShowAddForm(false);
   };
 
-  const token = localStorage.getItem(ACCESS_TOKEN);
-  const actions = token ? (
-    <button onClick={handleLogout} className="navbar-btn">Logout</button>
-  ) : null;
+  const actions = (
+  <button onClick={handleLogout} className="navbar-btn">
+    Logout
+  </button>
+);
 
   return (
     <div>

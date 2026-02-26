@@ -13,11 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchLessons = async () => {
       try {
-        const res = await api.get("/api/user/my-lessons/", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-          },
-        });
+        const res = await api.get("/api/user/my-lessons/");
         setLessons(res.data); 
       } catch (err) {
         console.error("Failed to fetch lessons:", err);
@@ -38,16 +34,20 @@ function Home() {
     console.log("Searching for:", query);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(REFRESH_TOKEN);
-    navigate("/login");
+  const handleLogout = async () => {
+  try {
+    await api.post("/api/logout/");
+  } catch (err) {
+    console.log(err);
+  }
+  navigate("/login");
   };
 
-  const token = localStorage.getItem(ACCESS_TOKEN);
-  const actions = token ? (
-    <button onClick={handleLogout} className="navbar-btn">Logout</button>
-  ) : null;
+  const actions = (
+  <button onClick={handleLogout} className="navbar-btn">
+    Logout
+  </button>
+);
 
   return (
     <div>

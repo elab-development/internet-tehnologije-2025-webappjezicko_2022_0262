@@ -23,18 +23,19 @@ function Lessons() {
     console.log("Searching for:", query);
   };
 
-  const token = localStorage.getItem(ACCESS_TOKEN);
-  const actions = token ? (
-    <button onClick={() => {
-      localStorage.removeItem(ACCESS_TOKEN);
-      localStorage.removeItem(REFRESH_TOKEN);
-      navigate("/login");
-    }} className="navbar-btn">Logout</button>
-  ) : (
-    <>
-      <button onClick={() => navigate("/login")}>Login</button>
-      <button onClick={() => navigate("/register")}>Register</button>
-    </>
+  const handleLogout = async () => {
+  try {
+    await api.post("/api/logout/");
+  } catch (err) {
+    console.log(err);
+  }
+  navigate("/login");
+  };
+
+  const actions = (
+  <button onClick={handleLogout} className="navbar-btn">
+    Logout
+  </button>
   );
 
   useEffect(() => {
