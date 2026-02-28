@@ -71,3 +71,9 @@
   font-weight: 900;
   justify-content: space-between;
 }
+
+.answer-editor {
+  margin-top: 15px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}

@@ -126,3 +126,41 @@ class Task(models.Model):
 
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     task_type = models.ForeignKey(TaskType, on_delete=models.PROTECT)
+
+class Answer(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="answers")
+
+    text = models.CharField(max_length=255, null=True, blank=True)
+    is_correct = models.BooleanField(default=False)
+
+    # za zadatke sa povezivanjem
+    match_key = models.CharField(max_length=255, null=True, blank=True)
+    match_value = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"Answer for task {self.task.id}"
+
+class UserAnswer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("user", "task")
+    # tekstualni odgovor
+    text_answer = models.TextField(null=True, blank=True)
+
+    # za multiple choice
+    selected_answer = models.ForeignKey(
+        Answer,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    # za matching
+    matching_answer = models.JSONField(null=True, blank=True)
+
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user} - {self.task}"

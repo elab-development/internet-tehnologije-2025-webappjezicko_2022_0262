@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import api from "../api";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Lesson.css";
 import "../styles/Task.css";
 import {useToast} from "../components/ToastProvider.jsx";
+import AdminAnswerEditor from "../components/adminAnswers/AdminAnswerEditor";
 
 function Details() {
 
@@ -18,6 +18,7 @@ function Details() {
     exercise_num : ""
   });
   const [tasks, setTasks] = useState([])
+  const [taskTypes, setTaskTypes] = useState([]);
   const { addToast } = useToast();
 
   // Navbar links
@@ -56,6 +57,10 @@ function Details() {
 };
 
   const handleDeleteLesson = async () => {
+    if(tasks.length !== 0) {
+      addToast("error", "Delete All tasks first!");
+      return;
+    }
     try {
         await api.delete(`api/adminpanel/lessons/${lesson.id}/`);
         alert("Lekcija obrisana!");
@@ -67,39 +72,75 @@ function Details() {
 };
 
   const handleAddTask = () => {
-    setTasks(prev => [
+  if (tasks.length >= lesson.exercise_num) {
+    addToast("error", "Maximum number of tasks reached");
+    return;
+  }
+  const nextSequence = tasks.length + 1;
+
+  setTasks(prev => [
     ...prev,
     {
         id: null,
-        sequence_number: "",
+        sequence_number: nextSequence,
         task_description: "",
         xp_amount: "",
-        audio: false,
+        audio: true,
         task_type: "",
         isNew: true
     }
-])
+  ])
 };
 
+  const handleCancelTask = (idx) => {
+  const newTasks = [...tasks];
+  newTasks.splice(idx, 1);
+  setTasks(newTasks);
+};
+
+  const getTotalXP = () => {
+    return tasks.reduce((sum, t) => sum + Number(t.xp_amount || 0), 0);
+  };
+
+
+
   const handleSaveTask = async (task) => {
+    const totalXP = getTotalXP();
+    
+    if (!task.task_type) {
+      addToast("error", "Select task type");
+    return;
+    }
+
+    if (totalXP > lesson.total_XP) {
+        addToast("error", "Total XP exceeds lesson XP");
+        return;
+    }
+
     try{
-        const res = await api.post(`api/adminpanel/lessons/${lesson.id}/tasks`, task);
+        await api.post(`api/adminpanel/lessons/${lesson.id}/tasks`, task);
         fetchTasks()
     } catch (err) {
         console.error("Error saving task:", err);
         addToast("error", "Failed to save task");
-      } 
-
+    } 
   };
 
   const handleUpdateTask = async (task) => {
+    const totalXP = getTotalXP();
+
+    if (totalXP > lesson.total_XP) {
+        addToast("error", "Total XP exceeds lesson XP");
+        return;
+    }
+
     try{
         await api.patch(`api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`, task);
         fetchTasks();
     } catch (err) {
         console.error("Error saving task:", err);
         addToast("error", "Failed to save task");
-      } 
+    } 
   };
 
   const handleDeleteTask = async (task) => {
@@ -125,16 +166,27 @@ function Details() {
   const fetchTasks = async () => {
       try{
         const res = await api.get(`api/adminpanel/lessons/${id}/tasks`);
-        setTasks(res.data);
+        setTasks(res.data.sort((a,b) => a.sequence_number - b.sequence_number));
       } catch(err) {
         console.error("Error fetching tasks:", err);
         addToast("error", "Failed to fetch tasks");
       }
     };
 
+  const fetchTaskTypes = async () => {
+    try{
+      const res = await api.get(`api/adminpanel/task-types`);
+      setTaskTypes(res.data);
+    }catch (err) {
+      console.error("Error fetching task types:", err);
+      addToast("error", "Failed to fetch task types");
+    }
+  };
+
   useEffect(() => {
     fetchLesson();
     fetchTasks();
+    fetchTaskTypes();
   }, [id]);
 
 
@@ -190,31 +242,34 @@ function Details() {
                   placeholder="task desciption"/>
 
               <label>Sequence number:</label>
-              <input className="task-input" value={task.sequence_number}
-                  onChange={(e) => {
-                  const newTasks = [...tasks];
-                  newTasks[idx].sequence_number = e.target.value;
-                  setTasks(newTasks);
-                  }}
-                  placeholder="task sequence number"/>
-
-              <label>Audio:</label>
-              <input className="task-input" value={task.audio}
-                  onChange={(e) => {
-                  const newTasks = [...tasks];
-                  newTasks[idx].audio = e.target.value;
-                  setTasks(newTasks);
-                  }}
-                  placeholder="does task contain listening audio files(true or false)"/>
+              <input className="task-input" value={task.sequence_number} readOnly/>
+              
+              <label>Audio:</label>  
+              <select className="task-input" value={task.audio}
+                    onChange={(e) => {
+                      const newTasks = [...tasks];
+                      newTasks[idx].audio = e.target.value === "true";
+                      setTasks(newTasks);
+                    }}>
+                    <option value="false">False</option>
+                    <option value="true">True</option>
+              </select>
 
               <label>Task type:</label>
-              <input className="task-input" value={task.task_type}
-                  onChange={(e) => {
-                  const newTasks = [...tasks];
-                  newTasks[idx].task_type = e.target.value;
-                  setTasks(newTasks);
-                  }}
-                  placeholder="the type of given task"/>
+              <select className="task-input" value={task.task_type || ""}
+                    onChange={(e) => {
+                      const newTasks = [...tasks];
+                      newTasks[idx].task_type = Number(e.target.value);
+                      setTasks(newTasks);
+                  }}>
+
+                  <option value="">Select type</option>
+                  {taskTypes.map(type => (
+                    <option key={type.id} value={type.id}>
+                      {type.name}
+                    </option>
+                  ))}
+              </select>
 
               <label>XP:</label>
               <input className="task-input" value={task.xp_amount}
@@ -225,19 +280,38 @@ function Details() {
                   }}
                   placeholder="amount of XP that the task gives"/>
 
-              <button onClick={() => handleUpdateTask(task)} className="task-button">Izmeni</button>
+              <button 
+                onClick={() => handleUpdateTask(task)} 
+                disabled={task.isNew}
+                className="task-button"
+              >
+                Izmeni
+              </button>
               <button onClick={() => handleDeleteTask(task)} className="task-button">Obriši</button>
 
               {task.isNew && (
+              <>
               <button onClick={() => handleSaveTask(task, idx)} className="task-button">
                 Zavrsi
               </button>
+              <button onClick={() => handleCancelTask(idx)} className="task-button"
+              style={{backgroundColor: "gray"}}>
+                Otkaži
+              </button>
+              </>
               )}
-
               </div>
+              {task.id && (
+                <AdminAnswerEditor task={task} />
+              )}
             </div>
           ))}
-          <button onClick={handleAddTask}>Dodaj zadatak</button>
+          {!tasks.some(t => t.isNew) && (
+            <button onClick={handleAddTask}>
+              Dodaj zadatak
+            </button>
+          )}
+
         </section>
       </main>
     </div>

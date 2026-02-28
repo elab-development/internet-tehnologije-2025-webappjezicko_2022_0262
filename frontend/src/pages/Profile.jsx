@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import NavBar from "../components/NavBar";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import { useNavigate } from "react-router-dom";
 import "../styles/Profile.css";
 

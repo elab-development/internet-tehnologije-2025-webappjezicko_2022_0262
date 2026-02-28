@@ -64,6 +64,8 @@ admin.site.register(Lesson)
 admin.site.register(LessonEnrollement)
 admin.site.register(Task)
 admin.site.register(TaskType)
+admin.site.register(UserAnswer)
+admin.site.register(Answer)
 
 
 # Register your models here.

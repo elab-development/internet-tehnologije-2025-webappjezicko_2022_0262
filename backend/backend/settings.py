@@ -157,8 +157,7 @@ CSRF_COOKIE_SECURE = False   # Set to True in production with HTTPS
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    "http://localhost:5173"
 ]
 
 AUTH_USER_MODEL = 'users.User'

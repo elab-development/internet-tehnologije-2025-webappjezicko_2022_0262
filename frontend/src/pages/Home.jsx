@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import api from "../api";
 import "../styles/Lesson.css"
 import "../styles/NavBar.css"

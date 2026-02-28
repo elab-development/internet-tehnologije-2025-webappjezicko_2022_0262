@@ -1,4 +1,4 @@
-from users.models import User, RegularUser, PremiumUser, Lesson, LessonEnrollement, Task
+from users.models import *
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -55,3 +55,13 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ["id","sequence_number","task_description","xp_amount","audio","task_type","task_type_name"]
+
+class TaskTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskType
+        fields = ["id", "name", "description"]
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ["id", "text", "is_correct", "match_key", "match_value"]

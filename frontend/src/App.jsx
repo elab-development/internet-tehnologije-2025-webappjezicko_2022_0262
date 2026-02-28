@@ -1,4 +1,3 @@
-import React from "react"
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -10,15 +9,11 @@ import Lessons from "./pages/Lessons"
 import Admin from "./pages/Admin"
 import Details from "./pages/LessonDetails"
 import ProbaTTS from "./pages/ProbaTTS"
+import api from "./api";
 
 function Logout(){
-  localStorage.clear();
+  api.post("/api/logout/");
   return <Navigate to="/login"/>
-}
-
-function RegisterAndLogout(){
-  localStorage.clear();
-  return <Register />
 }
 
 function App() {
@@ -26,8 +21,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/login"/> }/>
+
+        <Route
+          path="/login" element={<Login />}
+        />
         <Route 
-          path="/" element={
+          path="/home" element={
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>}
@@ -39,9 +39,6 @@ function App() {
           </ProtectedRoute>}
         />
         <Route path="/lessons/:id" element={<Details />} /> 
-        <Route
-          path="/login" element={<Login />}
-        />
         <Route
           path="/logout" element={<Logout />}
         />
