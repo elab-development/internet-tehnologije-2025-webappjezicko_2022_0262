@@ -1,19 +1,20 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api"; // Make sure this path is correct based on your folder structure!
 import "../styles/NavBar.css"
 
 export default function NavBar({
     brand = "Jezičko",
     links = [],
-    onSearch,
-    searchPlaceholder = "Search...",
-    actions = null,
 }) {
-    const [query, setQuery] = useState("");
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (onSearch) onSearch(query);
+    const handleLogout = async () => {
+        try {
+            await api.post("/api/logout/");
+        } catch (err) {
+            console.error(err);
+        }
+        navigate("/login");
     };
 
     return (
@@ -29,19 +30,12 @@ export default function NavBar({
                         </Link>
                     ))}
                 </nav>
-
-                {onSearch && (
-                    <form onSubmit={handleSubmit} className="navbar-search">
-                        <input
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            placeholder={searchPlaceholder}
-                            className="navbar-input"
-                        />
-                        <button type="submit" className="navbar-btn">Search</button>
-                    </form>
-                )}
-                <div className="navbar-actions">{actions}</div>
+                
+                <div className="navbar-actions">
+                    <button onClick={handleLogout} className="logout-btn">
+                        Logout
+                    </button>
+                </div>          
             </div>
         </header>
     );

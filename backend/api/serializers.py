@@ -65,3 +65,19 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = ["id", "text", "is_correct", "match_key", "match_value"]
+
+# class TaskSerializer(serializers.ModelSerializer):
+#     task_type_name = serializers.CharField(source="task_type.name", read_only=True)
+
+#     class Meta:
+#         model = Task
+
+#         fields = [
+#             "id", 
+#             "sequence_number", 
+#             "task_description", 
+#             "xp_amount", 
+#             "audio", 
+#             "task_type", 
+#             "task_type_name"
+#         ]        

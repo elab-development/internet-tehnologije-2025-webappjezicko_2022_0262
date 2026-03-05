@@ -93,7 +93,7 @@ function Lessons() {
               <button
                 onClick={() => handleEnroll(lesson.id)}
                 disabled={enrolledIds.includes(lesson.id)}
-                className="enroll-button"
+                className="details-button"
               >
                 {enrolledIds.includes(lesson.id) ? "Enrolled" : "Enroll"}
               </button>

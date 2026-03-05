@@ -13,7 +13,7 @@ function Home() {
     const fetchLessons = async () => {
       try {
         const res = await api.get("/api/user/my-lessons/");
-        setLessons(res.data); 
+        setLessons(res.data);
       } catch (err) {
         console.error("Failed to fetch lessons:", err);
       }
@@ -34,33 +34,43 @@ function Home() {
   };
 
   const handleLogout = async () => {
-  try {
-    await api.post("/api/logout/");
-  } catch (err) {
-    console.log(err);
-  }
-  navigate("/login");
+    try {
+      await api.post("/api/logout/");
+    } catch (err) {
+      console.log(err);
+    }
+    navigate("/login");
   };
 
   const actions = (
-  <button onClick={handleLogout} className="navbar-btn">
-    Logout
-  </button>
-);
+    <button onClick={handleLogout} className="navbar-btn">
+      Logout
+    </button>
+  );
 
   return (
     <div>
       <NavBar brand="Jezičko" links={links} onSearch={handleSearch} actions={actions} />
 
       <main>
-        <h1 className="heading">Welcome to Jezičko!</h1>
+        <div className="header-section">
+          <h1 className="heading">Welcome to Jezičko!</h1>
+        </div>
 
         <section className="lessons-container">
           {lessons.map((lesson, idx) => (
             <div key={idx} className="lesson-card">
               <h3>{lesson.lesson_name}</h3>
-              <p>XP: {lesson.earned_XP}</p>
-              
+              <p style={{ fontWeight: '700', marginBottom: '15px' }}>
+                XP: {lesson.earned_XP}
+              </p>
+{/* 
+              <button
+                onClick={() => navigate(`/lessons/${lesson.id}/start`)}
+                className="detail-button"
+              >
+                Start!
+              </button> */}
             </div>
           ))}
         </section>

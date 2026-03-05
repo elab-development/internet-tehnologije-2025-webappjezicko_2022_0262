@@ -5,14 +5,15 @@
 
 .navbar-inner {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 15px 30px;
-  font-size: 25px;
+  align-items: center; 
+  width: 100%;
+  padding: 15px 30px; 
+  box-sizing: border-box;
 }
 
 .navbar-brand {
   font-weight: 900;
+  font-size: 2.2rem;
   text-decoration: none;
   color: #0e0c14;
   padding-right: 100px;
@@ -20,6 +21,7 @@
 }
 
 .navbar-links {
+  font-size: 1.4rem;
   display: flex;
   gap: 75px;
 }
@@ -65,6 +67,34 @@
 }
 
 .navbar-actions {
+  margin-left: auto; 
   display: flex;
-  gap: 8px;
+  align-items: center;
+}
+
+.logout-btn {
+  margin-top: auto; 
+  align-self: center;
+  
+  background-color: #54cc04;
+  color: #0e0c14;
+  border: 2px solid #0e0c14; 
+  
+  font-weight: 900;
+  font-size: 1.4rem;
+  padding: 8px 24px; 
+  border-radius: 30px;
+  cursor: pointer;
+  width: 150px;
+  
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #0e0c14;
+  color: #54cc04;
+
+  transform: translateY(-5px); 
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4);
 }

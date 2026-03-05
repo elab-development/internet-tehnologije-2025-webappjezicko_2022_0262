@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
@@ -11,9 +11,9 @@ import Details from "./pages/LessonDetails"
 import ProbaTTS from "./pages/ProbaTTS"
 import api from "./api";
 
-function Logout(){
+function Logout() {
   api.post("/api/logout/");
-  return <Navigate to="/login"/>
+  return <Navigate to="/login" />
 }
 
 function App() {
@@ -21,12 +21,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login"/> }/>
+        <Route path="/" element={<Navigate to="/login" />} />
 
         <Route
           path="/login" element={<Login />}
         />
-        <Route 
+        <Route
           path="/home" element={
             <ProtectedRoute>
               <Home />
@@ -34,22 +34,22 @@ function App() {
         />
         <Route
           path="/admin" element={
-          <ProtectedRoute>
-            <Admin/>
-          </ProtectedRoute>}
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>}
         />
-        <Route path="/lessons/:id" element={<Details />} /> 
+        <Route path="/lessons/:id" element={<Details />} />
         <Route
           path="/logout" element={<Logout />}
         />
         <Route
-          path="/proba" element={<ProbaTTS/>}
-          />
+          path="/proba" element={<ProbaTTS />}
+        />
         <Route
           path="/register" element={<Register />}
         />
         <Route
-          path="*" element={<NotFound/>}
+          path="*" element={<NotFound />}
         />
         <Route
           path="/profile"
