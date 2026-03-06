@@ -10,6 +10,7 @@ import Admin from "./pages/Admin"
 import Details from "./pages/LessonDetails"
 import ProbaTTS from "./pages/ProbaTTS"
 import api from "./api";
+import Start from "./pages/LessonStart"
 
 function Logout() {
   api.post("/api/logout/");
@@ -51,6 +52,8 @@ function App() {
         <Route
           path="*" element={<NotFound />}
         />
+
+        <Route path="/lessons/:id/start" element={<Start />} />
         <Route
           path="/profile"
           element={

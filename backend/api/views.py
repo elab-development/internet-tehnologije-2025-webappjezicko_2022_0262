@@ -134,6 +134,11 @@ class EnrollLessonView(generics.CreateAPIView):
         serializer = self.get_serializer(enrollment)
         return Response(serializer.data, status=201)
 
+class LessonUserView(generics.RetrieveAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [IsAuthenticated]
+
 class LessonListCreateView(generics.ListCreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
@@ -151,6 +156,16 @@ class LessonEnrollmentView(generics.ListAPIView):
     def get_queryset(self):
         return LessonEnrollement.objects.filter(user=self.request.user)
     
+
+class TaskListView(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        lesson_id = self.kwargs["pk"]
+        return Task.objects.filter(lesson=lesson_id)
+    
+
 
 class TaskListCreateView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
@@ -183,7 +198,6 @@ class TaskListCreateView(generics.ListCreateAPIView):
             raise serializers.ValidationError(
                 "Total XP of tasks cannot exceed lesson.total_XP"
             )
-
         last_task = Task.objects.filter(
             lesson=lesson
         ).order_by("-sequence_number").first()

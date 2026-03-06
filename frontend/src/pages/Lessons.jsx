@@ -13,7 +13,7 @@ function Lessons() {
 
   // Navbar links
   const links = [
-    { to: "/", label: "Lessons" },
+    { to: "/home", label: "Lessons" },
     { to: "/lessons", label: "Available Lessons" },
     { to: "/profile", label: "Profile" },
   ];

@@ -20,9 +20,10 @@ export default function NavBar({
     return (
         <header className="navbar-wrap">
             <div className="navbar-inner">
-
-                <Link to="/" className="navbar-brand">{brand}</Link>
-
+                {/* 
+                Ovo ako moze da se namesti za admina da vodi na /admin bilo bi dobro al neka stoji zasada ovako
+                <Link to="/home" className="navbar-brand">{brand}</Link>
+                */}
                 <nav className="navbar-links">
                     {links.map((link) => (
                         <Link key={link.to} to={link.to} className="navbar-link">

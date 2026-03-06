@@ -37,11 +37,12 @@ class LessonSerializer(serializers.ModelSerializer):
 
 class LessonEnrollmentSerializer(serializers.ModelSerializer):
     lesson_name = serializers.CharField(source="lesson.lesson_name")
+    lesson_id = serializers.IntegerField(source="lesson.id")
     earned_XP = serializers.FloatField()
     
     class Meta:
         model = LessonEnrollement
-        fields = ["lesson_name", "earned_XP"] 
+        fields = ["id", "lesson_name", "earned_XP", "lesson_id"] 
 
 class CreateEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:

@@ -16,6 +16,8 @@ urlpatterns = [
     path("lessons/<int:lesson_id>/finish/", views.FinishLessonView.as_view(), name="finish-lesson"),
     path("adminpanel/lessons/<int:lesson_pk>/tasks/<int:pk>/change", views.TaskUpdateDeleteView.as_view(), name="lesson-task-change"),
     path("user/my-lessons/", views.LessonEnrollmentView.as_view(), name="my-lessons"),
+    path("user/lesson/<int:pk>/", views.LessonUserView.as_view(), name="user-lesson"),
+    path("user/lesson/<int:pk>/tasks/", views.TaskListView.as_view(), name="user-lesson-tasks"),
     path("user/lessons/", views.LessonListView.as_view(), name="available-lessons"),
     path("user/new-enrollement/", views.EnrollLessonView.as_view(), name="new-enrollment")
 ]

@@ -7,24 +7,24 @@ import "../styles/NavBar.css"
 
 function Home() {
   const navigate = useNavigate();
-  const [lessons, setLessons] = useState([]);
+  const [enrollments, setEnrollments] = useState([]);
 
   useEffect(() => {
-    const fetchLessons = async () => {
+    const fetchLessonsEnrollment = async () => {
       try {
         const res = await api.get("/api/user/my-lessons/");
-        setLessons(res.data);
+        setEnrollments(res.data);
       } catch (err) {
         console.error("Failed to fetch lessons:", err);
       }
     };
 
-    fetchLessons();
+    fetchLessonsEnrollment();
   }, []);
 
   // NavBar implementation
   const links = [
-    { to: "/", label: "Lessons" },
+    { to: "/home", label: "Lessons" },
     { to: "/lessons", label: "Available Lessons" },
     { to: "/profile", label: "Profile" },
   ];
@@ -58,19 +58,20 @@ function Home() {
         </div>
 
         <section className="lessons-container">
-          {lessons.map((lesson, idx) => (
+          {enrollments.map((enrollment, idx) => (
             <div key={idx} className="lesson-card">
-              <h3>{lesson.lesson_name}</h3>
+              <h3>{enrollment.lesson_name}</h3>
               <p style={{ fontWeight: '700', marginBottom: '15px' }}>
-                XP: {lesson.earned_XP}
+                XP: {enrollment.earned_XP}
               </p>
-{/* 
+              {
               <button
-                onClick={() => navigate(`/lessons/${lesson.id}/start`)}
+                onClick={() => navigate(`/lessons/${enrollment.lesson_id}/start`)}
                 className="detail-button"
+                
               >
                 Start!
-              </button> */}
+              </button>}
             </div>
           ))}
         </section>
