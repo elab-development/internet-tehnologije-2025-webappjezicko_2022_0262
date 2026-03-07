@@ -84,6 +84,7 @@ function Details() {
         id: null,
         sequence_number: nextSequence,
         task_description: "",
+        question: "",
         xp_amount: "",
         audio: true,
         task_type: "",
@@ -240,6 +241,15 @@ function Details() {
                   setTasks(newTasks);
                   }}
                   placeholder="task desciption"/>
+                
+              <label>Question:</label>
+              <input className="task-input" value={task.question}
+                  onChange={(e) => {
+                  const newTasks = [...tasks];
+                  newTasks[idx].question = e.target.value;
+                  setTasks(newTasks);
+                  }}
+                  placeholder="task question"/>
 
               <label>Sequence number:</label>
               <input className="task-input" value={task.sequence_number} readOnly/>

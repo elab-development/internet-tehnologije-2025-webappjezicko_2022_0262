@@ -1,8 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function AdminTextAnswer({ answers, onAdd }) {
+
+function AdminTextAnswer({ answers, onAdd, onDelete }) {
 
   const [text, setText] = useState("");
+  const [isButtonDisabled, setButtonDisabled] = useState();
+  
+  useEffect(() => {
+    if (answers.length > 0) {
+      setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
+    }
+  }, [answers]);
+
+  const handleAdd = () => {
+    onAdd([
+      {
+        text: text,
+        is_correct: true
+      }
+    ]);
+
+    setText("");
+  };
+
+  const handleDelete = (id) => {
+    onDelete(id);
+  };
+
 
   return (
     <div>
@@ -12,6 +38,9 @@ function AdminTextAnswer({ answers, onAdd }) {
       {answers.map(a => (
         <div key={a.id}>
           {a.text}
+          <button onClick={() => handleDelete(a.id)}>
+            Delete
+          </button>
         </div>
       ))}
 
@@ -21,14 +50,7 @@ function AdminTextAnswer({ answers, onAdd }) {
         onChange={(e) => setText(e.target.value)}
       />
 
-      <button onClick={() =>
-        onAdd([
-          {
-            text: text,
-            is_correct: true
-          }
-        ])
-      }>
+      <button disabled={isButtonDisabled} onClick={handleAdd}>
         Save
       </button>
 

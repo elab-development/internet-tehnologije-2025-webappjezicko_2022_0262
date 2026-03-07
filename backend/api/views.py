@@ -241,11 +241,21 @@ class TaskTypeListView(generics.ListAPIView):
     serializer_class = TaskTypeSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
-class TaskAnswersView(APIView):
-
+class TaskCorrectAnswerView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, task_id):
+    def get(self, request, *args, **kwargs):
+        task_id = self.kwargs["task_id"] 
+        answer = Answer.objects.get(task_id=task_id)
+        serializer = AnswerSerializer(answer)
+        return Response(serializer.data)
+    
+
+class TaskAnswersView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        task_id = self.kwargs["task_id"]  
         answers = Answer.objects.filter(task_id=task_id)
         serializer = AnswerSerializer(answers, many=True)
         return Response(serializer.data)

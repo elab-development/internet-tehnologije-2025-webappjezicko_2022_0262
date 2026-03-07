@@ -24,6 +24,28 @@ function Start() {
     { to: "/lessons", label: "Available Lessons" },
     { to: "/profile", label: "Profile" },
   ];
+  
+
+  const handleListen = async (task) => {
+    try {
+        let speech = new SpeechSynthesisUtterance();
+        const res = await api.get(`api/user/lesson/task/${task.id}/answer/`);
+        const answer = res.data.text;
+        const question = task.question;
+        if(question.includes("_")){
+          const finalSentance = question.replace(/_+/g, answer);
+          speech.text = finalSentance;
+        } else {
+          const finalSentance = question.replace(question, answer);
+          speech.text = finalSentance;
+        }
+        window.speechSynthesis.speak(speech);
+        
+      } catch (err) {
+        console.error("Error fetching answer:", err);
+        addToast("error", "Failed to fetch answer");
+      }
+  }
 
   const handleSearch = (query) => {
     console.log("Searching for:", query);
@@ -108,20 +130,18 @@ function Start() {
                   setTasks(newTasks);
                   }}
                   placeholder="task desciption"/>
+              
+              <label>Question:</label>
+              <input className="task-input" value={task.question}
+                  onChange={(e) => {
+                  const newTasks = [...tasks];
+                  newTasks[idx].question = e.target.value;
+                  setTasks(newTasks);
+                  }}
+                  placeholder="task question"/>
 
               <label>Sequence number:</label>
               <input className="task-input" value={task.sequence_number} readOnly/>
-              
-              <label>Audio:</label>  
-              <select className="task-input" value={task.audio}
-                    onChange={(e) => {
-                      const newTasks = [...tasks];
-                      newTasks[idx].audio = e.target.value === "true";
-                      setTasks(newTasks);
-                    }}>
-                    <option value="false">False</option>
-                    <option value="true">True</option>
-              </select>
 
               <label>XP:</label>
               <input className="task-input" value={task.xp_amount}
@@ -131,6 +151,12 @@ function Start() {
                   setTasks(newTasks);
                   }}
                   placeholder="amount of XP that the task gives"/>
+              
+              {task.audio && (
+              <button onClick={() => handleListen(task)}>
+                Listen
+              </button>
+              )}
 
               </div>
             </div>

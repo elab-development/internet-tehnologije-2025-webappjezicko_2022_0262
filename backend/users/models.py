@@ -121,6 +121,7 @@ class TaskType(models.Model):
 class Task(models.Model):
     sequence_number = models.IntegerField()
     task_description = models.CharField(max_length=120)
+    question = models.CharField(max_length=255, null=True, blank=True)
     audio = models.BooleanField()
     xp_amount = models.FloatField()
 
