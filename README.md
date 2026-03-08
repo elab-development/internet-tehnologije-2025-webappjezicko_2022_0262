@@ -69,7 +69,7 @@ U folderu projekta u bash terminalu uraditi:
 
     docker compose up --build
 
-Nakon što se završi build-ovanje zaustaviti proces i uraditi:
+Nakon što se završi build-ovanje zaustaviti proces detachovanjem i uraditi:
 
     docker-compose exec backend python manage.py createsuperuser
 
