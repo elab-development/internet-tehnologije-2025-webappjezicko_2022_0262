@@ -2,31 +2,33 @@ import { useState } from "react";
 
 function AdminMatching({ answers, onAdd, onDelete }) {
 
-  const [pairs, setPairs] = useState([]);
+  const [keyText, setKeyText] = useState("");
+  const [valueText, setValueText] = useState("");
 
-  const addPair = () => {
-    setPairs([
-      ...pairs,
-      { match_key: "", match_value: "" }
+  const MAX_PAIRS = 4;
+
+  const handleSave = async () => {
+
+    if (!keyText.trim() || !valueText.trim()) return;
+
+    await onAdd([
+      {
+        match_key: keyText,
+        match_value: valueText
+      }
     ]);
+
+    // reset inputa
+    setKeyText("");
+    setValueText("");
   };
 
-  const update = (idx, field, value) => {
-    const arr = [...pairs];
-    arr[idx][field] = value;
-    setPairs(arr);
-  };
-
-  const remove = (idx) => {
-    const arr = [...pairs];
-    arr.splice(idx, 1);
-    setPairs(arr);
-  };
+  const isDisabled = answers.length >= MAX_PAIRS;
 
   return (
     <div>
 
-      <h4>Existing</h4>
+      <h4>Existing pairs</h4>
 
       {answers.map(a => (
         <div key={a.id}>
@@ -37,39 +39,26 @@ function AdminMatching({ answers, onAdd, onDelete }) {
         </div>
       ))}
 
-      <h4>New</h4>
+      <h4>Add new pair</h4>
 
-      {pairs.map((p, idx) => (
-        <div key={idx}>
+      <input
+        placeholder="Word"
+        value={keyText}
+        onChange={(e) => setKeyText(e.target.value)}
+        disabled={isDisabled}
+      />
 
-          <input
-            placeholder="Word"
-            value={p.match_key}
-            onChange={(e) =>
-              update(idx, "match_key", e.target.value)
-            }
-          />
+      <input
+        placeholder="Meaning"
+        value={valueText}
+        onChange={(e) => setValueText(e.target.value)}
+        disabled={isDisabled}
+      />
 
-          <input
-            placeholder="Meaning"
-            value={p.match_value}
-            onChange={(e) =>
-              update(idx, "match_value", e.target.value)
-            }
-          />
-
-          <button onClick={() => remove(idx)}>
-            Remove
-          </button>
-
-        </div>
-      ))}
-
-      <button onClick={addPair}>
-        Add pair
-      </button>
-
-      <button onClick={() => onAdd(pairs)}>
+      <button
+        onClick={handleSave}
+        disabled={isDisabled || !keyText.trim() || !valueText.trim()}
+      >
         Save
       </button>
 

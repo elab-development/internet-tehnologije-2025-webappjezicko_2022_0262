@@ -2,31 +2,34 @@ import { useState } from "react";
 
 function AdminMultipleChoice({ answers, onAdd, onDelete }) {
 
-  const [options, setOptions] = useState([]);
+  const [text, setText] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
 
-  const addOption = () => {
-    setOptions([
-      ...options,
-      { text: "", is_correct: false }
+  const MAX_OPTIONS = 4;
+
+  const handleSave = async () => {
+
+    if (!text.trim()) return;
+
+    await onAdd([
+      {
+        text: text,
+        is_correct: isCorrect
+      }
     ]);
+
+    // reset inputa
+    setText("");
+    setIsCorrect(false);
   };
 
-  const update = (idx, field, value) => {
-    const arr = [...options];
-    arr[idx][field] = value;
-    setOptions(arr);
-  };
-
-  const remove = (idx) => {
-    const arr = [...options];
-    arr.splice(idx, 1);
-    setOptions(arr);
-  };
+  const isDisabled = answers.length >= MAX_OPTIONS;
 
   return (
     <div>
 
-      <h4>Existing</h4>
+      <h4>Existing answers</h4>
+
       {answers.map(a => (
         <div key={a.id}>
           {a.text} ({a.is_correct ? "✓" : "✗"})
@@ -36,39 +39,26 @@ function AdminMultipleChoice({ answers, onAdd, onDelete }) {
         </div>
       ))}
 
-      <h4>New</h4>
+      <h4>Add new answer</h4>
 
-      {options.map((o, idx) => (
-        <div key={idx}>
+      <input
+        placeholder="Answer text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        disabled={isDisabled}
+      />
 
-          <input
-            placeholder="Text"
-            value={o.text}
-            onChange={(e) =>
-              update(idx, "text", e.target.value)
-            }
-          />
+        <input
+          type="checkbox"
+          checked={isCorrect}
+          onChange={(e) => setIsCorrect(e.target.checked)}
+          disabled={isDisabled}
+        />
 
-          <input
-            type="checkbox"
-            checked={o.is_correct}
-            onChange={(e) =>
-              update(idx, "is_correct", e.target.checked)
-            }
-          />
-
-          <button onClick={() => remove(idx)}>
-            Remove
-          </button>
-
-        </div>
-      ))}
-
-      <button onClick={addOption}>
-        Add option
-      </button>
-
-      <button onClick={() => onAdd(options)}>
+      <button
+        onClick={handleSave}
+        disabled={isDisabled || !text.trim()}
+      >
         Save
       </button>
 

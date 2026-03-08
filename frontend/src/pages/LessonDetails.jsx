@@ -18,7 +18,9 @@ function Details() {
     exercise_num : ""
   });
   const [tasks, setTasks] = useState([])
+  const [serverTasks, setServerTasks] = useState([]);
   const [taskTypes, setTaskTypes] = useState([]);
+  const [originalTaskTypes, setOriginalTaskTypes] = useState({});
   const { addToast } = useToast();
 
   // Navbar links
@@ -128,21 +130,40 @@ function Details() {
   };
 
   const handleUpdateTask = async (task) => {
-    const totalXP = getTotalXP();
+  const totalXP = getTotalXP();
 
-    if (totalXP > lesson.total_XP) {
-        addToast("error", "Total XP exceeds lesson XP");
-        return;
+  if (totalXP > lesson.total_XP) {
+    addToast("error", "Total XP exceeds lesson XP");
+    return;
+  }
+
+  try {
+    const originalType = originalTaskTypes[task.id];
+
+    if (task.task_type !== originalType) {
+      const res = await api.get(`api/tasks/${task.id}/answers`);
+
+      if (res.data.length > 0) {
+        addToast(
+          "error",
+          "You must delete existing answers before changing task type"
+        );
+        return; 
+      }
     }
 
-    try{
-        await api.patch(`api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`, task);
-        fetchTasks();
-    } catch (err) {
-        console.error("Error saving task:", err);
-        addToast("error", "Failed to save task");
-    } 
-  };
+    await api.patch(
+      `api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`,
+      task
+    );
+
+    fetchTasks();
+
+  } catch (err) {
+    console.error("Error saving task:", err);
+    addToast("error", "Failed to save task");
+  }
+};
 
   const handleDeleteTask = async (task) => {
     try{
@@ -165,14 +186,24 @@ function Details() {
     };
   
   const fetchTasks = async () => {
-      try{
-        const res = await api.get(`api/adminpanel/lessons/${id}/tasks`);
-        setTasks(res.data.sort((a,b) => a.sequence_number - b.sequence_number));
-      } catch(err) {
-        console.error("Error fetching tasks:", err);
-        addToast("error", "Failed to fetch tasks");
-      }
-    };
+  try {
+    const res = await api.get(`api/adminpanel/lessons/${id}/tasks`);
+    const sortedTasks = res.data.sort((a,b) => a.sequence_number - b.sequence_number);
+
+    setTasks(sortedTasks);
+    setServerTasks(sortedTasks);
+
+    const typeMap = {};
+    sortedTasks.forEach(t => {
+      typeMap[t.id] = t.task_type;
+    });
+    setOriginalTaskTypes(typeMap);
+
+  } catch(err) {
+    console.error("Error fetching tasks:", err);
+    addToast("error", "Failed to fetch tasks");
+  }
+};
 
   const fetchTaskTypes = async () => {
     try{

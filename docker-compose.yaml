@@ -14,7 +14,7 @@ services:
   backend:
     build: ./backend
     container_name: django_backend
-    restart: on-failure  # <--- ADD THIS LINE RIGHT HERE
+    restart: on-failure
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/app

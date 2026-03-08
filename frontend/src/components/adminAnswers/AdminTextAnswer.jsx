@@ -50,7 +50,7 @@ function AdminTextAnswer({ answers, onAdd, onDelete }) {
         onChange={(e) => setText(e.target.value)}
       />
 
-      <button disabled={isButtonDisabled} onClick={handleAdd}>
+      <button disabled={isButtonDisabled || !text.trim()} onClick={handleAdd}>
         Save
       </button>
 
