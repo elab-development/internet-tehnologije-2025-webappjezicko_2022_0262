@@ -88,3 +88,7 @@ U tom slučaju u docker-compose fajlu treba dodati:
     python manage.py loaddata backup.json
 
 u okviru command dela u backend-a
+
+Na kraju samo ponovo pokrenuti docker:
+
+    docker compose up
