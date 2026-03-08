@@ -4,7 +4,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 urlpatterns = [
     path("user/me/", views.CurrentUserView.as_view(), name="current-user"),
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/", views.CookieObtainView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", views.CookieTokenRefreshView.as_view(), name="token_refresh"),
     path("adminpanel/lessons/", views.LessonListCreateView.as_view(), name="lesson-list"),
     path("adminpanel/task-types/", views.TaskTypeListView.as_view(), name="task-types"),
     path("adminpanel/lessons/<int:pk>/", views.LessonDetailView.as_view(), name="lesson-detail"),

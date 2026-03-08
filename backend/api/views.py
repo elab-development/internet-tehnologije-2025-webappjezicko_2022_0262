@@ -15,8 +15,10 @@ from rest_framework import serializers
 from users.services.answer_service import check_answer
 from users.services.xp_service import calculate_lesson_xp
 from rest_framework import status
+from .authentication import CookieJWTAuthentication
 
 class CurrentUserView(APIView):
+    authentication_classes = [CookieJWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -44,7 +46,8 @@ class CookieObtainView(EmailTokenObtainPairView):
             value=access,
             httponly=True,
             secure=False,
-            samesite="Lax"
+            samesite="Lax",
+            path="/"
         )
 
         response.set_cookie(
@@ -52,7 +55,8 @@ class CookieObtainView(EmailTokenObtainPairView):
             value=refresh,
             httponly=True,
             secure=False,
-            samesite="Lax"
+            samesite="Lax",
+            path="/"
         )
 
         return response
@@ -75,7 +79,8 @@ class CookieTokenRefreshView(APIView):
                 value=access,
                 httponly=True,
                 secure=False,
-                samesite="Lax"
+                samesite="Lax",
+                path='/'
             )
 
             return response

@@ -8,3 +8,5 @@ pytz
 sqlparse
 psycopg
 python-dotenv
+psycopg2-binary>=2.9.0
+drf-spectacular

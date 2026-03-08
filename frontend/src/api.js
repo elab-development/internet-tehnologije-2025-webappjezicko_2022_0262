@@ -1,7 +1,7 @@
 import axios from "axios"
 const api = axios.create({
     //baseURL: import.meta.env.VITE_API_URL,
-    baseURL: "/",
+    baseURL: '/',
     withCredentials: true // šalje cookie
 })
 
@@ -58,5 +58,24 @@ api.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+api.interceptors.request.use((config) => {
+    const name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    if (cookieValue) {
+        config.headers['X-CSRFToken'] = cookieValue;
+    }
+    return config;
+});
 
 export default api;

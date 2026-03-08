@@ -14,8 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from rest_framework import permissions
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from api.views import CreateUserView, CookieObtainView, CookieTokenRefreshView, LogoutView
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -26,5 +29,7 @@ urlpatterns = [
     path('api/logout/', LogoutView.as_view(), name="logout"),
     path("api/token/refresh/", CookieTokenRefreshView.as_view(), name="token_refresh"),
     path('api-auth/', include("rest_framework.urls")),
-    path('api/', include("api.urls"))
+    path('api/', include("api.urls")),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui')
 ]

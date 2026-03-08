@@ -1,0 +1,1554 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-01-29T13:48:30.467Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "jaksa",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-01-29T13:48:34.409Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "neko",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-02-04T15:08:12.868Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Admin user: admin",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-02-04T15:58:54.088Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "1",
+    "object_repr": "jaksa -> Aaaa",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-02-04T15:59:14.867Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "nestojos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-02-04T15:59:42.558Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "jaksa -> nestojos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-02-05T17:17:21.491Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "Najnovija",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-02-05T17:55:16.328Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "mihalekcija",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-02-06T12:23:06.016Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "test_lekcija_1",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-02-06T12:23:24.389Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7",
+    "object_repr": "test_lekcija_2",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-02-06T12:23:38.359Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "8",
+    "object_repr": "test_lekcija_3",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-02-06T12:24:12.545Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "5",
+    "object_repr": "barnacle -> test_lekcija_1",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-02-06T12:24:36.436Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "6",
+    "object_repr": "barnacle -> test_lekcija_2",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-02-06T12:24:40.441Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "5",
+    "object_repr": "barnacle -> test_lekcija_1",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-02-06T12:25:08.502Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "7",
+    "object_repr": "barnacle -> test_lekcija_3",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-02-06T16:52:18.687Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "8",
+    "object_repr": "barnacle -> nestojos",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-02-06T16:52:23.727Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "9",
+    "object_repr": "barnacle -> Najnovija",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-02-06T17:01:34.992Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "12",
+    "object_repr": "barnacle -> Aaaa",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-02-06T17:01:36.745Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "11",
+    "object_repr": "barnacle -> Najnovija",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-02-06T17:01:39.315Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "10",
+    "object_repr": "barnacle -> nestojos",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-02-07T15:00:30.859Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "15",
+    "object_repr": "barnacle -> Najnovija",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-02-07T15:00:43.195Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "13",
+    "object_repr": "barnacle -> nestojos",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-02-07T15:58:41.876Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "16",
+    "object_repr": "barnacle -> mihalekcija",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-02-07T15:58:44.413Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "17",
+    "object_repr": "barnacle -> nestojos",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-02-07T21:38:00.055Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "Aaaa",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-02-07T21:38:04.943Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "nestojos",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-02-07T21:38:07.515Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "Najnovija",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-02-07T21:38:11.301Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "mihalekcija",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-02-07T21:38:13.593Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "test_lekcija_1",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-02-07T21:38:16.956Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7",
+    "object_repr": "test_lekcija_2",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-02-07T21:38:19.618Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "8",
+    "object_repr": "test_lekcija_3",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-02-07T21:40:14.861Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "9",
+    "object_repr": "Engleski-Greetings & Introductions",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-02-07T21:40:56.684Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "10",
+    "object_repr": "Engleski-Shopping&Food",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-02-07T21:41:37.718Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "11",
+    "object_repr": "Nemacki-Alltag",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-02-07T21:42:03.737Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "12",
+    "object_repr": "Spanski-La familia",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-02-07T21:42:46.246Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "13",
+    "object_repr": "Nemacki-Unterwegs",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-02-07T21:44:14.328Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "aleksa",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"User name\", \"Birth date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-02-24T21:26:08.964Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "14",
+    "object_repr": "NESTO",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2026-02-25T13:01:21.849Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "TaskType object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2026-02-25T13:01:46.397Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "TaskType object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2026-02-25T13:02:23.222Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "1",
+    "object_repr": "Task object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2026-02-25T13:02:37.653Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "2",
+    "object_repr": "Task object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2026-02-27T13:24:44.314Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "7",
+    "object_repr": "Task object (7)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2026-02-28T13:02:44.704Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "TaskType object (3)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2026-02-28T15:21:21.838Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "13",
+    "object_repr": "Task object (13)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2026-02-28T15:21:40.275Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "TaskType object (2)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2026-02-28T15:21:50.297Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "14",
+    "object_repr": "Task object (14)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2026-02-28T15:21:59.105Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "TaskType object (3)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2026-02-28T15:22:03.337Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "TaskType object (1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2026-02-28T15:22:46.960Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "4",
+    "object_repr": "TaskType object (4)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2026-02-28T15:23:46.787Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "5",
+    "object_repr": "TaskType object (5)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2026-02-28T15:24:30.663Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "6",
+    "object_repr": "TaskType object (6)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2026-03-07T19:12:24.895Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "13",
+    "object_repr": "Answer for task 16",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9zz60jmp8sk1wfgbn0xmrj58kgrzufrd",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSE8ChSX7v0GMswwUjU0Ke3K-O_apAvd3nPOfYkE21rT1suSJhJnocXpd8uAj9J2QHdot1ni3NZlynJX5EG7vM5UnpfD_Tuo0Ou3No4DhpEiOAWEoPOY0YMLzmZWukTWA8VIrBQZQssDe2sjaueLZjDi_QEAHziP:1vyU98:mwISsXzY2wOt2BrrGepzaGrMeXE4qMzExZqFcxmWFlA",
+    "expire_date": "2026-03-20T12:19:10.582Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "a2vk508ahkpvi6i2s7q1ljd1p2novqca",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyFQoLAevfcbyAKLVA0kpT0Z_9026UGvb2bem3nc1uK3ToufE7syyS6_W8D4pHqA9MB6bzy2ui5z4IfCT9r51BK9bqf7d1Cwl702YxRRGjW4JITVWVEEGtEACINCJhlcdoMVYC1YnQgy6ZABtdstKRX7fAHG4DdV:1vuv4m:MGMjZ9N_VrEkk242MJDTHEbg9attRlWaz4ADFHkyIow",
+    "expire_date": "2026-03-10T16:15:56.354Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dbxnvokvypt1quuexk3xo7465fequsy7",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAQAP-yNbJYEx-bkp43RLs-cADZUpxUiL-jSCmgnRnNGybe1jJtPS3THGEEhNMvEw7PVHcRH1zvTYVW12UWtSfqsF3dWkyv69H-DQr3AiNoTyY5SwEDscvRZUrRD468I5HIiNoYSwbzBbOVIbAVZEbNhGzOAp8v4IQ34g:1vojn8:MWnWOFGhYyzshVgreRxQBqSqahriIYnaYn9KU2uaJx4",
+    "expire_date": "2026-02-21T15:00:10.495Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "fh06jmbngr1pqq90ny0esc7x7qblxl5a",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQBf-FsyFQoLAevfcbyAKLVA0kpT0Z_9026UGvb2bem3nc1uK3ToufE7syyS6_W8D4pHqA9MB6bzy2ui5z4IfCT9r51BK9bqf7d1Cwl702YxRRGjW4JITVWVEEGtEACINCJhlcdoMVYC1YnQgy6ZABtdstKRX7fAHG4DdV:1vopzw:DmmdJLQUma6bkCj2TK7z4p_fz-p6y60XimiMA2AJZxo",
+    "expire_date": "2026-02-21T21:37:48.928Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "o2sj0ukjpfs7mhhmmtluz6i1q6lj46s3",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAQAP-yNbJs42tT0ucN1vrCAeRIcVIh_o4spYB2ZjRv8HTs1R89b35JMIGAyy8LFJ-5DZEe1O4ri2vbtyWwkbDTdjavKb9uZ_s3qNQrTKCVSShtsehIWa2xOG2wEBd0NdkicSdRYLEqc5JopDVClYCDRlMcfL6zEDaO:1voKpP:UvYXBA6m1ANWiZMewmqXaiuvetMGhSS8-KVXGc7pjJY",
+    "expire_date": "2026-02-20T12:20:51.187Z"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$6v0cwHeCsY4aAKBjXD4BmQ$QbxIFDwFqeo/tszQtjfCHs7atAS2h0iaG8+rwD9hqH0=",
+    "last_login": "2026-03-06T12:19:10.577Z",
+    "is_superuser": true,
+    "name": "admin",
+    "surname": "admin",
+    "birth_date": "2003-03-03",
+    "email": "admin@admin.com",
+    "user_name": "admin",
+    "user_type": "admin",
+    "is_staff": true,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$sIjMOKsLmaiu7EBvrRVQ8I$P41ZskEqHR+CkbOd3oFcMjhA2BP6Shm7hRkNke+Nt9Q=",
+    "last_login": null,
+    "is_superuser": false,
+    "name": "Aleksa",
+    "surname": "Jaksic",
+    "birth_date": "2003-07-04",
+    "email": "aleksa@gmail.com",
+    "user_name": "aleksa",
+    "user_type": "regular",
+    "is_staff": false,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$OARwpv94W9WITN3V8Xu8Gg$L/8AzE+V8FzfZIhF6WQZfyFhowdgylH1z74ngzH7/LI=",
+    "last_login": null,
+    "is_superuser": false,
+    "name": "neko",
+    "surname": "neko",
+    "birth_date": "2024-01-10",
+    "email": "neko@neko.com",
+    "user_name": "neko",
+    "user_type": "premium",
+    "is_staff": false,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$PIQA4oHeysKvvX06vdXFTZ$l4B56T6CrQXBOJpMe2TxOxKv92h+8IZNlDnHtFfveIA=",
+    "last_login": null,
+    "is_superuser": false,
+    "name": "Mihailo",
+    "surname": "Miha",
+    "birth_date": "2026-01-26",
+    "email": "miha@miha.com",
+    "user_name": "miha",
+    "user_type": "regular",
+    "is_staff": false,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$0jN3Tl690GuQdfGemxtlhJ$Ol7uREXb7wAmGdqWUie81UpmY/O+5S7n2OOFh/x5KZQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "name": "Michael",
+    "surname": "Jordan",
+    "birth_date": "1995-01-14",
+    "email": "goat@email.com",
+    "user_name": "goat",
+    "user_type": "regular",
+    "is_staff": false,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$Ibr1nrwJFFDyOgDn9ribhC$nh7cqhHbZkFw1GdLX+KW3wUwxP8Vr8WqOLo26GGekMk=",
+    "last_login": null,
+    "is_superuser": false,
+    "name": "Barny",
+    "surname": "Stinson",
+    "birth_date": "1980-06-17",
+    "email": "barny@barny.com",
+    "user_name": "barnacle",
+    "user_type": "regular",
+    "is_staff": false,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$LHodyitvy5415c5W3JhPzB$ZM9YCZGD04eafbK7Ld5G4XsWJiY64IncWxaSPR5nuc8=",
+    "last_login": null,
+    "is_superuser": false,
+    "name": "neko",
+    "surname": "nesto",
+    "birth_date": "2026-02-07",
+    "email": "neko@gmail.com",
+    "user_name": "nesto",
+    "user_type": "regular",
+    "is_staff": false,
+    "is_active": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.regularuser",
+  "pk": 4,
+  "fields": {
+    "daily_limit": 10
+  }
+},
+{
+  "model": "users.regularuser",
+  "pk": 6,
+  "fields": {
+    "daily_limit": 10
+  }
+},
+{
+  "model": "users.regularuser",
+  "pk": 7,
+  "fields": {
+    "daily_limit": 10
+  }
+},
+{
+  "model": "users.regularuser",
+  "pk": 8,
+  "fields": {
+    "daily_limit": 10
+  }
+},
+{
+  "model": "users.regularuser",
+  "pk": 9,
+  "fields": {
+    "daily_limit": 10
+  }
+},
+{
+  "model": "users.premiumuser",
+  "pk": 5,
+  "fields": {
+    "subscription_fee": 20.0
+  }
+},
+{
+  "model": "users.adminuser",
+  "pk": 1,
+  "fields": {
+    "description": "Nesto"
+  }
+},
+{
+  "model": "users.lesson",
+  "pk": 9,
+  "fields": {
+    "lesson_name": "Engleski-Greetings & Introductions",
+    "date_created": "2026-02-07",
+    "total_XP": 1620.0,
+    "exercise_num": 5
+  }
+},
+{
+  "model": "users.lesson",
+  "pk": 10,
+  "fields": {
+    "lesson_name": "Engleski-Shopping&Food",
+    "date_created": "2026-01-23",
+    "total_XP": 1200.0,
+    "exercise_num": 3
+  }
+},
+{
+  "model": "users.lesson",
+  "pk": 11,
+  "fields": {
+    "lesson_name": "Nemacki-Alltag",
+    "date_created": "2026-02-02",
+    "total_XP": 1080.0,
+    "exercise_num": 5
+  }
+},
+{
+  "model": "users.lesson",
+  "pk": 12,
+  "fields": {
+    "lesson_name": "Spanski-La familia",
+    "date_created": "2026-02-02",
+    "total_XP": 950.0,
+    "exercise_num": 5
+  }
+},
+{
+  "model": "users.lesson",
+  "pk": 13,
+  "fields": {
+    "lesson_name": "Nemacki-Unterwegs",
+    "date_created": "2025-12-03",
+    "total_XP": 1750.0,
+    "exercise_num": 6
+  }
+},
+{
+  "model": "users.lesson",
+  "pk": 20,
+  "fields": {
+    "lesson_name": "German - days of the week",
+    "date_created": "2026-03-08",
+    "total_XP": 200.0,
+    "exercise_num": 4
+  }
+},
+{
+  "model": "users.lessonenrollement",
+  "pk": 21,
+  "fields": {
+    "user": 4,
+    "lesson": 9,
+    "start_date": "2026-02-07",
+    "end_date": null,
+    "status": "started",
+    "earned_XP": 0.0
+  }
+},
+{
+  "model": "users.lessonenrollement",
+  "pk": 22,
+  "fields": {
+    "user": 4,
+    "lesson": 11,
+    "start_date": "2026-02-07",
+    "end_date": null,
+    "status": "started",
+    "earned_XP": 0.0
+  }
+},
+{
+  "model": "users.lessonenrollement",
+  "pk": 23,
+  "fields": {
+    "user": 8,
+    "lesson": 11,
+    "start_date": "2026-03-05",
+    "end_date": null,
+    "status": "started",
+    "earned_XP": 0.0
+  }
+},
+{
+  "model": "users.lessonenrollement",
+  "pk": 25,
+  "fields": {
+    "user": 4,
+    "lesson": 10,
+    "start_date": "2026-03-06",
+    "end_date": null,
+    "status": "started",
+    "earned_XP": 0.0
+  }
+},
+{
+  "model": "users.lessonenrollement",
+  "pk": 26,
+  "fields": {
+    "user": 8,
+    "lesson": 20,
+    "start_date": "2026-03-08",
+    "end_date": null,
+    "status": "completed",
+    "earned_XP": 200.0
+  }
+},
+{
+  "model": "users.tasktype",
+  "pk": 4,
+  "fields": {
+    "name": "multiple_choice",
+    "description": "Choosing the right word out of the ones that are offered.",
+    "xp_amount": 9999.0
+  }
+},
+{
+  "model": "users.tasktype",
+  "pk": 5,
+  "fields": {
+    "name": "text",
+    "description": "Filling in the blank word or writing a sentence with and without listening.",
+    "xp_amount": 9999.0
+  }
+},
+{
+  "model": "users.tasktype",
+  "pk": 6,
+  "fields": {
+    "name": "matching",
+    "description": "Correctly matching pairs of words.",
+    "xp_amount": 9999.0
+  }
+},
+{
+  "model": "users.task",
+  "pk": 15,
+  "fields": {
+    "sequence_number": 1,
+    "task_description": "awsdadsa",
+    "question": "Ovo je recenica.",
+    "audio": true,
+    "xp_amount": 92.0,
+    "lesson": 9,
+    "task_type": 5
+  }
+},
+{
+  "model": "users.task",
+  "pk": 16,
+  "fields": {
+    "sequence_number": 2,
+    "task_description": "Nesto",
+    "question": "I walked in the ____.",
+    "audio": true,
+    "xp_amount": 92.0,
+    "lesson": 9,
+    "task_type": 5
+  }
+},
+{
+  "model": "users.task",
+  "pk": 17,
+  "fields": {
+    "sequence_number": 3,
+    "task_description": "Ako",
+    "question": "I did something nice with my ____.",
+    "audio": true,
+    "xp_amount": 90.0,
+    "lesson": 9,
+    "task_type": 5
+  }
+},
+{
+  "model": "users.task",
+  "pk": 19,
+  "fields": {
+    "sequence_number": 1,
+    "task_description": "What does this word mean?",
+    "question": null,
+    "audio": false,
+    "xp_amount": 80.0,
+    "lesson": 10,
+    "task_type": 4
+  }
+},
+{
+  "model": "users.task",
+  "pk": 21,
+  "fields": {
+    "sequence_number": 3,
+    "task_description": "Translate given sentence",
+    "question": null,
+    "audio": true,
+    "xp_amount": 80.0,
+    "lesson": 10,
+    "task_type": 5
+  }
+},
+{
+  "model": "users.task",
+  "pk": 22,
+  "fields": {
+    "sequence_number": 4,
+    "task_description": "What does this word mean?",
+    "question": null,
+    "audio": true,
+    "xp_amount": 70.0,
+    "lesson": 10,
+    "task_type": 4
+  }
+},
+{
+  "model": "users.task",
+  "pk": 24,
+  "fields": {
+    "sequence_number": 1,
+    "task_description": "Match given words",
+    "question": null,
+    "audio": false,
+    "xp_amount": 50.0,
+    "lesson": 11,
+    "task_type": 4
+  }
+},
+{
+  "model": "users.task",
+  "pk": 35,
+  "fields": {
+    "sequence_number": 1,
+    "task_description": "How do you say Thursday?",
+    "question": "",
+    "audio": true,
+    "xp_amount": 50.0,
+    "lesson": 20,
+    "task_type": 4
+  }
+},
+{
+  "model": "users.task",
+  "pk": 36,
+  "fields": {
+    "sequence_number": 2,
+    "task_description": "In given sentence what does Tag mean?",
+    "question": "Ich spiele Fussball jeden Tag.",
+    "audio": true,
+    "xp_amount": 50.0,
+    "lesson": 20,
+    "task_type": 5
+  }
+},
+{
+  "model": "users.task",
+  "pk": 37,
+  "fields": {
+    "sequence_number": 3,
+    "task_description": "Translate this sentence:",
+    "question": "Ich muss am Mittwoch arbeiten.",
+    "audio": false,
+    "xp_amount": 50.0,
+    "lesson": 20,
+    "task_type": 5
+  }
+},
+{
+  "model": "users.task",
+  "pk": 38,
+  "fields": {
+    "sequence_number": 4,
+    "task_description": "Match given pairs:",
+    "question": "",
+    "audio": false,
+    "xp_amount": 50.0,
+    "lesson": 20,
+    "task_type": 6
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 37,
+  "fields": {
+    "task": 19,
+    "text": "duck",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 38,
+  "fields": {
+    "task": 19,
+    "text": "cow",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 39,
+  "fields": {
+    "task": 19,
+    "text": "peacock",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 44,
+  "fields": {
+    "task": 21,
+    "text": "Ovo je neki tekst",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 45,
+  "fields": {
+    "task": 21,
+    "text": "Ovo je neki tekst",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 46,
+  "fields": {
+    "task": 21,
+    "text": "Ovo je neki tekst",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 47,
+  "fields": {
+    "task": 22,
+    "text": "duck",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 48,
+  "fields": {
+    "task": 22,
+    "text": "mallard",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 49,
+  "fields": {
+    "task": 22,
+    "text": "blue jay",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 50,
+  "fields": {
+    "task": 22,
+    "text": "magpie",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 51,
+  "fields": {
+    "task": 22,
+    "text": "raven",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 56,
+  "fields": {
+    "task": 24,
+    "text": "Mittwoch",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 57,
+  "fields": {
+    "task": 24,
+    "text": "Dienstag",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 58,
+  "fields": {
+    "task": 24,
+    "text": "Freitag",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 91,
+  "fields": {
+    "task": 17,
+    "text": "friend",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 100,
+  "fields": {
+    "task": 16,
+    "text": "park",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 101,
+  "fields": {
+    "task": 15,
+    "text": "This is a sentence.",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 121,
+  "fields": {
+    "task": 35,
+    "text": "Freitag",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 122,
+  "fields": {
+    "task": 35,
+    "text": "Dienstag",
+    "is_correct": false,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 123,
+  "fields": {
+    "task": 35,
+    "text": "Donnerstag",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 124,
+  "fields": {
+    "task": 36,
+    "text": "Day",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 125,
+  "fields": {
+    "task": 37,
+    "text": "I have to work on Wednesday.",
+    "is_correct": true,
+    "match_key": null,
+    "match_value": null
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 126,
+  "fields": {
+    "task": 38,
+    "text": null,
+    "is_correct": false,
+    "match_key": "Mittwoch",
+    "match_value": "Wednesday"
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 127,
+  "fields": {
+    "task": 38,
+    "text": null,
+    "is_correct": false,
+    "match_key": "Dienstag",
+    "match_value": "Tuesday"
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 128,
+  "fields": {
+    "task": 38,
+    "text": null,
+    "is_correct": false,
+    "match_key": "Samstag",
+    "match_value": "Saturday"
+  }
+},
+{
+  "model": "users.answer",
+  "pk": 129,
+  "fields": {
+    "task": 38,
+    "text": null,
+    "is_correct": false,
+    "match_key": "Donnerstag",
+    "match_value": "Thursday"
+  }
+},
+{
+  "model": "users.useranswer",
+  "pk": 1,
+  "fields": {
+    "user": 8,
+    "task": 35,
+    "text_answer": null,
+    "selected_answer": 123,
+    "matching_answer": null,
+    "is_correct": true
+  }
+},
+{
+  "model": "users.useranswer",
+  "pk": 2,
+  "fields": {
+    "user": 8,
+    "task": 36,
+    "text_answer": "day",
+    "selected_answer": null,
+    "matching_answer": null,
+    "is_correct": true
+  }
+},
+{
+  "model": "users.useranswer",
+  "pk": 3,
+  "fields": {
+    "user": 8,
+    "task": 37,
+    "text_answer": "I have to work on Wednesday.",
+    "selected_answer": null,
+    "matching_answer": null,
+    "is_correct": true
+  }
+},
+{
+  "model": "users.useranswer",
+  "pk": 4,
+  "fields": {
+    "user": 8,
+    "task": 38,
+    "text_answer": null,
+    "selected_answer": null,
+    "matching_answer": [
+      {
+        "key": "Mittwoch",
+        "value": "Wednesday"
+      },
+      {
+        "key": "Samstag",
+        "value": "Tuesday"
+      },
+      {
+        "key": "Donnerstag",
+        "value": "Saturday"
+      },
+      {
+        "key": "Dienstag",
+        "value": "Thursday"
+      }
+    ],
+    "is_correct": false
+  }
+}
+]
