@@ -15,21 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from rest_framework import permissions
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.contrib import admin
-from django.urls import path, include, re_path
-from api.views import CreateUserView, CookieObtainView, CookieTokenRefreshView, LogoutView
-from rest_framework_simplejwt.views import TokenRefreshView
+from django.urls import path, include
 
 urlpatterns = [
+    
+    # view za django admin panel
     path('admin/', admin.site.urls),
-    path('api/user/register/', CreateUserView.as_view(), name="register"),
-    path('api/token/', CookieObtainView.as_view(), name="get_token"),
-    path('api/logout/', LogoutView.as_view(), name="logout"),
-    path("api/token/refresh/", CookieTokenRefreshView.as_view(), name="token_refresh"),
-    path('api-auth/', include("rest_framework.urls")),
+    
+    # ne mora vise da se koristi ali nek ostane za crne dane
+    # path('api-auth/', include("rest_framework.urls")),
+    
+    # forwardovanje na endpointe u api-u
     path('api/', include("api.urls")),
+
+    # view-ovi za swagger
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui')
 ]

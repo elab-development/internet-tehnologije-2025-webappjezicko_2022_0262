@@ -2,6 +2,8 @@ from users.models import *
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+# USER SERIALIZER
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -17,23 +19,16 @@ class UserSerializer(serializers.ModelSerializer):
         elif user_type == 'premium':
             PremiumUser.objects.create(user = user)
 
-        return user
-    
-class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
-    username_field = 'email'
+        return user    
 
-    def validate(self, attrs):
-        data = super().validate(attrs)
-
-        data["user_type"] = self.user.user_type
-
-        return data
-    
+# LESSON SERIALIZER
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = ["id", "lesson_name", "exercise_num", "date_created", "total_XP"]
+
+# LESSON ENROLLMENT SERIALIZER
 
 class LessonEnrollmentSerializer(serializers.ModelSerializer):
     lesson_name = serializers.CharField(source="lesson.lesson_name")
@@ -44,11 +39,15 @@ class LessonEnrollmentSerializer(serializers.ModelSerializer):
         model = LessonEnrollement
         fields = ["id", "lesson_name", "earned_XP", "lesson_id"] 
 
+# SERIALIZER ZA KREIRANJE LESSON ENROLLMENT-A 
+
 class CreateEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonEnrollement
         fields = ["id", "lesson", "status", "start_date"]
         read_only_fields = ["status", "start_date"]
+
+# TASK SERIALIZER
 
 class TaskSerializer(serializers.ModelSerializer):
     task_type_name = serializers.CharField(source="task_type.name", read_only=True)
@@ -57,28 +56,29 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ["id","sequence_number","task_description","question","xp_amount","audio","task_type","task_type_name"]
 
+# TASK TYPE SERIALIZER
+
 class TaskTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskType
         fields = ["id", "name", "description"]
+
+# ANSWER SERIALIZER
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = ["id", "text", "is_correct", "match_key", "match_value"]
 
-# class TaskSerializer(serializers.ModelSerializer):
-#     task_type_name = serializers.CharField(source="task_type.name", read_only=True)
+# SERIALIZER ZA VRACANJE JWT TOKEN-A
 
-#     class Meta:
-#         model = Task
+class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'email'
 
-#         fields = [
-#             "id", 
-#             "sequence_number", 
-#             "task_description", 
-#             "xp_amount", 
-#             "audio", 
-#             "task_type", 
-#             "task_type_name"
-#         ]        
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        data["user_type"] = self.user.user_type
+
+        return data
+ 

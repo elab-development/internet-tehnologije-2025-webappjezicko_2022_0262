@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import *
 
-#ZA DORADU, TREBA DA SE SREDI JOS, MORA DA SE KREIRANJE I BRISANJE NEKAKO MALO SREDE NA ADMIN PANELU 
-
 class RegularUserInline(admin.StackedInline):
     model = RegularUser
     can_delete = False

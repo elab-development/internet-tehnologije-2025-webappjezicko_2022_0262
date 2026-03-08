@@ -30,6 +30,8 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+# USER MODEL
+
 class User(AbstractBaseUser, PermissionsMixin):
     USER_TYPE_CHOICES = (
         ('regular', 'Regular User'),
@@ -60,12 +62,16 @@ class User(AbstractBaseUser, PermissionsMixin):
             raise ValidationError('Nevazeci tip korisnika')
         super().save(*args, **kwargs)
 
+# REGULAR USER MODEL
+
 class RegularUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     daily_limit = models.IntegerField(default=10)
 
     def __str__(self):
         return f"Regular user: {self.user.user_name}"
+
+# PREMIUM USER MODEL
 
 class PremiumUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -74,12 +80,16 @@ class PremiumUser(models.Model):
     def __str__(self):
         return f"Premium user: {self.user.user_name}"
 
+# ADMIN USER MODEL
+
 class AdminUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     description = models.TextField(max_length=355)
 
     def __str__(self):
         return f"Admin user: {self.user.user_name}"
+
+# LESSON MODEL
 
 class Lesson(models.Model):
     lesson_name = models.CharField(max_length=120)
@@ -90,6 +100,8 @@ class Lesson(models.Model):
     def __str__(self):
         return self.lesson_name
     
+# LESSON ENROLLMENT MODEL
+
 class LessonEnrollement(models.Model):
     user = models.ForeignKey(
         User,
@@ -113,10 +125,14 @@ class LessonEnrollement(models.Model):
     def __str__(self):
         return f"{self.user} -> {self.lesson}"
 
+# TASK TYPE MODEL
+
 class TaskType(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField()
     xp_amount = models.FloatField()
+
+# TASK MODEL
 
 class Task(models.Model):
     sequence_number = models.IntegerField()
@@ -127,6 +143,8 @@ class Task(models.Model):
 
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     task_type = models.ForeignKey(TaskType, on_delete=models.PROTECT)
+
+# ANSWER MODEL
 
 class Answer(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="answers")
@@ -140,6 +158,8 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Answer for task {self.task.id}"
+
+# USER ANSWER MODEL
 
 class UserAnswer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

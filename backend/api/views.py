@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from users.models import *
+from .serializers import *
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import *
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .permissions import IsAdminUser
@@ -16,6 +15,8 @@ from users.services.answer_service import check_answer
 from users.services.xp_service import calculate_lesson_xp
 from rest_framework import status
 from .authentication import CookieJWTAuthentication
+
+# USER VIEW-OVI
 
 class CurrentUserView(APIView):
     authentication_classes = [CookieJWTAuthentication]
@@ -97,6 +98,8 @@ class LogoutView(APIView):
 
         return response
 
+# LESSON VIEW-OVI
+
 class LessonListView(generics.ListAPIView):
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated]
@@ -154,6 +157,8 @@ class LessonDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
+# LESSON ENROLLMENT VIEW
+
 class LessonEnrollmentView(generics.ListAPIView):
     serializer_class = LessonEnrollmentSerializer
     permission_classes = [IsAuthenticated]
@@ -162,6 +167,8 @@ class LessonEnrollmentView(generics.ListAPIView):
         return LessonEnrollement.objects.filter(user=self.request.user)
     
 
+# TASK VIEW-OVI
+
 class TaskListView(generics.ListAPIView):
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
@@ -169,8 +176,6 @@ class TaskListView(generics.ListAPIView):
     def get_queryset(self):
         lesson_id = self.kwargs["pk"]
         return Task.objects.filter(lesson=lesson_id)
-    
-
 
 class TaskListCreateView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
@@ -240,11 +245,16 @@ class TaskUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
             )
 
         serializer.save()
-    
+
+# TASK TYPE VIEW
+
 class TaskTypeListView(generics.ListAPIView):
     queryset = TaskType.objects.all()
     serializer_class = TaskTypeSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+# ANSWER VIEW-OVI
 
 class TaskCorrectAnswerView(APIView):
     permission_classes = [IsAuthenticated]
@@ -368,6 +378,8 @@ class SubmitAnswerView(APIView):
             "correct": user_answer.is_correct
         })
 
+
+# VIEW ZA ZAVRSAVANJE LEKCIJE
 
 class FinishLessonView(APIView):
     permission_classes = [IsAuthenticated]
