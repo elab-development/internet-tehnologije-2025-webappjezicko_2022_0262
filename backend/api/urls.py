@@ -43,4 +43,8 @@ urlpatterns = [
     path("answers/<int:answer_id>/delete", views.DeleteAnswerView.as_view()),
     path("tasks/<int:task_id>/answers/add/", views.AddAnswersView.as_view()),
 
+    
+    path("user/lessons/", views.LessonListView.as_view(), name="available-lessons"),
+    path("user/new-enrollement/", views.EnrollLessonView.as_view(), name="new-enrollment"),
+    path("user/analytics/enrollments/", views.EnrollmentAnalyticsView.as_view(), name="analytics-enrollments"),
 ]

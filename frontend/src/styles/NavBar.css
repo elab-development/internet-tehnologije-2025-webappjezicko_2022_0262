@@ -98,3 +98,79 @@
   transform: translateY(-5px); 
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4);
 }
+
+.word-tool-wrapper {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.word-tool-results {
+  position: absolute;
+  top: 130%; 
+  right: 0;
+  width: 320px;
+  background-color: #0e0c14; 
+  color: #54cc04; 
+  border: 2px solid #54cc04;  
+  border-radius: 10px 10px;
+  padding: 35px 20px 20px 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  text-align: left;
+}
+
+.word-tool-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #54cc04;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.word-tool-close:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+.word-tool-section {
+  margin-bottom: 15px;
+}
+
+.word-tool-section:last-child {
+  margin-bottom: 0;
+}
+
+.word-tool-title {
+  margin: 0 0 5px 0;
+  color: #fff; 
+  font-style: oblique;
+  font-size: 1.1rem;
+}
+
+.word-tool-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.word-tool-example {
+  margin: 8px 0 0 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.8; 
+}
+
+.word-tool-error {
+  color: #ff4d4d; 
+  font-weight: bold;
+  margin: 0;
+}
