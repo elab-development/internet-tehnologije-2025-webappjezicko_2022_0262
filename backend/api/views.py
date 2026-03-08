@@ -345,7 +345,10 @@ class SubmitAnswerView(APIView):
 
         # MATCHING
         elif task_type == "matching":
-            user_answer.matching_answer = request.data.get("pairs")
+            incoming_pairs = request.data.get("pairs")
+            print("=== DJANGO RECEIVED MATCHING PAYLOAD ===")
+            print("Received pairs:", incoming_pairs)
+            user_answer.matching_answer = incoming_pairs
 
         else:
             return Response(

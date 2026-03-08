@@ -18,8 +18,20 @@ def check_answer(task, user_answer):
         correct_dict = {
             a.match_key: a.match_value
             for a in correct_pairs
+            if a.match_key and a.match_value
         }
 
-        return correct_dict == user_answer.matching_answer
+        submitted_pairs = user_answer.matching_answer
+
+        if not isinstance(submitted_pairs, list):
+            return False
+
+        submitted_dict = {
+            pair.get("key"): pair.get("value")
+            for pair in submitted_pairs
+            if isinstance(pair, dict)
+        }
+
+        return correct_dict == submitted_dict
 
     return False

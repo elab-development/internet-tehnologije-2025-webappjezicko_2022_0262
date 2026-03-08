@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 urlpatterns = [
     path("user/me/", views.CurrentUserView.as_view(), name="current-user"),
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"), #Ovo je bezveze duplirano ne znam zasto je uopste pravljeno. ??
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("adminpanel/lessons/", views.LessonListCreateView.as_view(), name="lesson-list"),
     path("adminpanel/task-types/", views.TaskTypeListView.as_view(), name="task-types"),
     path("adminpanel/lessons/<int:pk>/", views.LessonDetailView.as_view(), name="lesson-detail"),
