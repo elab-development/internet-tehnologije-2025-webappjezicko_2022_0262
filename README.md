@@ -10,10 +10,10 @@ Ovo je full-stack web aplikacija koja korisnicima omogucaća učenje stranih jez
     Backend: Django
     Baza podataka: PostgreSQL
     Autentifikacija: JWT
-    Testiranje: /
-    CI/CD: /
+    Testiranje: Django built-in testiranje
+    CI/CD: GitHub Actions
     Containerizacija: Docker, Docker Compose
-    Cloud: /
+    Cloud: Google Cloud VM
     
 ### ⚙️ Konfiguracija okruženja
 
@@ -24,6 +24,16 @@ Pre pokretanja aplikacije potrebno je definisati .env fajl na backend-u.
 Tajni ključ za Django (koristi bilo koji random string)
 
     SECRET_KEY=super_secret_random_string
+
+Takođe je potrebno i skinuti sve dependency-e. 
+
+Potrebno je ukucati sledeću komandu u bash terminalu projekta:
+
+    cd backend/
+
+pa zatim:
+
+    pip install requirements.txt
 
 ### Na frontend-u (vite.config.js)  
 
