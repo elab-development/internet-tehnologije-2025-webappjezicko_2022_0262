@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 import os
+import dj_database_url
 
 load_dotenv()
 
@@ -99,7 +100,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if os.environ.get('DB_NAME'):
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    }
+elif os.environ.get('DB_NAME'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

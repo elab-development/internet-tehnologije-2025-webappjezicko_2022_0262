@@ -385,17 +385,44 @@ class FinishLessonView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, lesson_id):
-
         try:
             lesson = Lesson.objects.get(id=lesson_id)
         except Lesson.DoesNotExist:
-            return Response(
-                {"error": "Lesson ne postoji"},
-                status=404
-            )
+            return Response({"error": "Lesson ne postoji"}, status=404)
 
+        # Izračunaj XP
         xp = calculate_lesson_xp(request.user, lesson)
 
+        # Uzmi ili kreiraj enrollment
+        try:
+            enrollment = LessonEnrollement.objects.get(user=request.user, lesson=lesson)
+        except LessonEnrollement.DoesNotExist:
+            return Response({"error": "Enrollment ne postoji"}, status=404)
+
+        # Postavi datum završetka i earned XP
+        enrollment.earned_XP = xp
+        enrollment.status = "finished"
+        enrollment.end_date = date.today()
+        enrollment.save()
+
         return Response({
-            "xp": xp
+            "xp": xp,
+            "message": "Lekcija završena"
         })
+
+class EnrollmentAnalyticsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):     
+        total_lessons = Lesson.objects.count()
+        enrolled_count = LessonEnrollement.objects.filter(user=request.user).count()
+        
+        unenrolled_count = total_lessons - enrolled_count
+
+        chart_data = [
+            ["Category", "Number of lectures"],
+            ["Enrolled lectures", enrolled_count],
+            ["Available lectures", unenrolled_count]
+        ]
+
+        return Response(chart_data)

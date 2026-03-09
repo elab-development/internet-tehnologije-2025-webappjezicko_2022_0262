@@ -21,7 +21,7 @@ function WordTool() {
       if (dictResponse.ok) {
         setDefinition(dictData[0]);
       } else {
-        setError("Reč nije pronađena u rečniku.");
+        setError("Word not found in dictionary.");
       }
 
 
@@ -44,40 +44,40 @@ function WordTool() {
       const translateData = await translateResponse.json();
       setTranslation(translateData.translatedText);
     } catch (err) {
-      setError("Greška prilikom poziva API-ja.");
+      setError("Error while making API request.");
     }
   };
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Prevod i definicija reči</h2>
+      <h2>Translation and word definition</h2>
 
       <input
         type="text"
         value={word}
         onChange={(e) => setWord(e.target.value)}
-        placeholder="Unesite reč na engleskom"
+        placeholder="Insert word in English."
       />
 
-      <button onClick={handleSearch}>Pretraži</button>
+      <button onClick={handleSearch}>Find</button>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {translation && (
         <div>
-          <h3>Prevod:</h3>
+          <h3>Translation: </h3>
           <p>{translation}</p>
         </div>
       )}
 
       {definition && (
         <div>
-          <h3>Definicija:</h3>
+          <h3>Definition: </h3>
           <p>{definition.meanings[0].definitions[0].definition}</p>
 
           {definition.meanings[0].definitions[0].example && (
             <>
-              <h4>Primer:</h4>
+              <h4>Example: </h4>
               <p>{definition.meanings[0].definitions[0].example}</p>
             </>
           )}

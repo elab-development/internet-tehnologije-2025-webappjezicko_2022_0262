@@ -37,7 +37,7 @@ class LessonEnrollmentSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = LessonEnrollement
-        fields = ["id", "lesson_name", "earned_XP", "lesson_id"] 
+        fields = ["id", "lesson_name", "status", "start_date", "end_date","earned_XP", "lesson_id"]
 
 # SERIALIZER ZA KREIRANJE LESSON ENROLLMENT-A 
 

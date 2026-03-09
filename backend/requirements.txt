@@ -10,3 +10,5 @@ psycopg
 python-dotenv
 psycopg2-binary>=2.9.0
 drf-spectacular
+gunicorn==21.2.0
+dj-database-url==2.1.0
