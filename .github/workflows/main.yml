@@ -37,4 +37,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JEZICKO_APP }}'
           projectId: jezicko-app
+          channelId: live 
           entryPoint: "./frontend"
