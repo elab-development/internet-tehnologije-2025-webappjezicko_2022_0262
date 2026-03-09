@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Deploy Backend
+        run: |
+          gcloud run deploy jezicko-backend \
+            --source ./backend \
+            --region europe-west3 \
+            --allow-unauthenticated \
+            --port 8000 \
+            --add-cloudsql-instances jezicko-app:europe-west3:jezicko-db-instance \
+            --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }},DEBUG=False,SECRET_KEY=${{ secrets.SECRET_KEY }}"
+
+      - name: Build and Deploy Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JEZICKO_APP }}'
+          projectId: jezicko-app
