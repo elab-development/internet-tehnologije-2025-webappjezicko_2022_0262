@@ -179,6 +179,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://jezicko-app.web.app",
+    "https://jezicko-app.firebaseapp.com",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -214,4 +216,7 @@ SPECTACULAR_SETTINGS = {
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    'https://jezicko-backend-495609328932.europe-west3.run.app',
+    'https://jezicko-app-21032.web.app',      
+    'https://jezicko-app-21032.firebaseapp.com'
 ]
