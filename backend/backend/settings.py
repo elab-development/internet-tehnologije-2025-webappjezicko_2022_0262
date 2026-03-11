@@ -179,8 +179,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://jezicko-app.web.app",
-    "https://jezicko-app.firebaseapp.com",
+    "https://jezicko-app-21032.web.app",
+    "https://jezicko-app-21032.firebaseapp.com",
 ]
 
 CORS_ALLOW_HEADERS = [
