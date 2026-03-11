@@ -1,7 +1,11 @@
 import axios from "axios"
+
+console.log("MOJ API LINK JE:", import.meta.env.VITE_API_URL);
+
 const api = axios.create({
+    baseURL: "https://jezicko-backend-495609328932.europe-west3.run.app",
     //baseURL: import.meta.env.VITE_API_URL,
-    baseURL: '/',
+    //baseURL: '/',
     withCredentials: true // šalje cookie
 })
 
