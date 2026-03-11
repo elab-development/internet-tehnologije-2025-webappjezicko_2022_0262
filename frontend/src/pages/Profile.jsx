@@ -30,7 +30,7 @@ function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get("http://localhost:8000/api/user/me/"); // we’ll create this endpoint next
+        const res = await api.get("/api/user/me/"); 
         setUser(res.data);
       } catch (err) {
         console.error("Failed to fetch user info:", err);

@@ -12,34 +12,36 @@ function Form({ route, method }) {
 
     const name = method === "login" ? "Login" : "Register"
     const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
+        setLoading(true);
+        e.preventDefault();
 
-    try {
-        const res = await api.post(route, { email, password });
+        try {
+            const res = await api.post(route, { email, password });
 
-        if (method === "login") {
-            // Cookie je već setovan na backendu
-            const userType = res.data.user_type;
+            if (method === "login") {
+                localStorage.setItem("access", res.data.access);
+                localStorage.setItem("refresh", res.data.refresh);
+                
+                const userType = res.data.user_type;
 
-            if (userType === "admin") {
-                navigate("/admin");
+                if (userType === "admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/home");
+                }
             } else {
-                navigate("/home");
+                navigate("/login");
             }
-        } else {
-            navigate("/login");
+        } catch (error) {
+            if (error.response && error.response.data) {
+                alert(JSON.stringify(error.response.data, null, 2));
+            } else {
+                alert("Došlo je do greške: " + error.message);
+            }
+        } finally {
+            setLoading(false);
         }
-    } catch (error) {
-        if (error.response && error.response.data) {
-            alert(JSON.stringify(error.response.data, null, 2));
-        } else {
-            alert(error);
-        }
-    } finally {
-        setLoading(false);
-    }
-};
+    };
 
     return <form onSubmit={handleSubmit} className="form-container">
         <h1> {name} </h1>

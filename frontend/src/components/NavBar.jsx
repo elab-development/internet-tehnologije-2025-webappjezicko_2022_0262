@@ -125,7 +125,7 @@ export default function NavBar({
                                 </h4>
 
                                 {analyticsLoading ? (
-                                    <p className="word-tool-text" style={{ textAlign: "center" }}>Učitavanje podataka...</p>
+                                    <p className="word-tool-text" style={{ textAlign: "center" }}>Loading data...</p>
                                 ) : analyticsError ? (
                                     <p className="word-tool-error" style={{ textAlign: "center" }}>{analyticsError}</p>
                                 ) : (
@@ -153,12 +153,12 @@ export default function NavBar({
                             type="text"
                             value={word}
                             onChange={(e) => setWord(e.target.value)}
-                            placeholder="Prevedi reč..."
+                            placeholder="Translate word..."
                             className="navbar-input"
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                         />
                         <button onClick={handleSearch} disabled={isSearching} className="logout-btn">
-                            {isSearching ? "..." : "Traži"}
+                            {isSearching ? "..." : "Find"}
                         </button>
 
                         {(definition || translation || error) && (
@@ -169,21 +169,21 @@ export default function NavBar({
 
                                 {translation && (
                                     <div className="word-tool-section">
-                                        <h4 className="word-tool-title">Prevod:</h4>
+                                        <h4 className="word-tool-title">Translation:</h4>
                                         <p className="word-tool-text">{translation}</p>
                                     </div>
                                 )}
 
                                 {definition && definition.meanings[0]?.definitions[0] && (
                                     <div className="word-tool-section">
-                                        <h4 className="word-tool-title">Definicija:</h4>
+                                        <h4 className="word-tool-title">Definition:</h4>
                                         <p className="word-tool-text">
                                             {definition.meanings[0].definitions[0].definition}
                                         </p>
 
                                         {definition.meanings[0].definitions[0].example && (
                                             <p className="word-tool-example">
-                                                Primer: "{definition.meanings[0].definitions[0].example}"
+                                                Example: "{definition.meanings[0].definitions[0].example}"
                                             </p>
                                         )}
                                     </div>

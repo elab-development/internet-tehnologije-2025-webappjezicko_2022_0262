@@ -2,20 +2,19 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import api from "../api";
-import "../styles/Lesson.css";
-import "../styles/Task.css";
-import {useToast} from "../components/ToastProvider.jsx";
+import { useToast } from "../components/ToastProvider.jsx";
 import AdminAnswerEditor from "../components/adminAnswers/AdminAnswerEditor";
+import "../styles/Admin.css"
 
 function Details() {
 
   const { id } = useParams();
   const navigate = useNavigate();
   const [lesson, setLesson] = useState({
-    lesson_name : "",
-    date_created : "",
-    total_XP : "",
-    exercise_num : ""
+    lesson_name: "",
+    date_created: "",
+    total_XP: "",
+    exercise_num: ""
   });
   const [tasks, setTasks] = useState([])
   const [serverTasks, setServerTasks] = useState([]);
@@ -34,55 +33,55 @@ function Details() {
   };
 
   const handleLogout = async () => {
-  try {
-    await api.post("/api/logout/");
-  } catch (err) {
-    console.log(err);
-  }
-  navigate("/login");
+    try {
+      await api.post("/api/logout/");
+    } catch (err) {
+      console.log(err);
+    }
+    navigate("/login");
   };
 
   const actions = (
-  <button onClick={handleLogout} className="navbar-btn">
-    Logout
-  </button>
+    <button onClick={handleLogout} className="navbar-btn">
+      Logout
+    </button>
   );
 
   const handleUpdateLesson = async () => {
     try {
-        await api.patch(`api/adminpanel/lessons/${lesson.id}/`, lesson);
-        alert("Lekcija uspešno izmenjena!");
-        navigate("/admin")
+      await api.patch(`api/adminpanel/lessons/${lesson.id}/`, lesson);
+      alert("Lekcija uspešno izmenjena!");
+      navigate("/admin")
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
-};
+  };
 
   const handleDeleteLesson = async () => {
-    if(tasks.length !== 0) {
+    if (tasks.length !== 0) {
       addToast("error", "Delete All tasks first!");
       return;
     }
     try {
-        await api.delete(`api/adminpanel/lessons/${lesson.id}/`);
-        alert("Lekcija obrisana!");
-        navigate("/admin"); // vrati na listu
+      await api.delete(`api/adminpanel/lessons/${lesson.id}/`);
+      alert("Lekcija obrisana!");
+      navigate("/admin"); // vrati na listu
     } catch (error) {
-        console.error(error);
-        alert("Greška pri brisanju");
+      console.error(error);
+      alert("Greška pri brisanju");
     }
-};
+  };
 
   const handleAddTask = () => {
-  if (tasks.length >= lesson.exercise_num) {
-    addToast("error", "Maximum number of tasks reached");
-    return;
-  }
-  const nextSequence = tasks.length + 1;
+    if (tasks.length >= lesson.exercise_num) {
+      addToast("error", "Maximum number of tasks reached");
+      return;
+    }
+    const nextSequence = tasks.length + 1;
 
-  setTasks(prev => [
-    ...prev,
-    {
+    setTasks(prev => [
+      ...prev,
+      {
         id: null,
         sequence_number: nextSequence,
         task_description: "",
@@ -91,15 +90,15 @@ function Details() {
         audio: true,
         task_type: "",
         isNew: true
-    }
-  ])
-};
+      }
+    ])
+  };
 
   const handleCancelTask = (idx) => {
-  const newTasks = [...tasks];
-  newTasks.splice(idx, 1);
-  setTasks(newTasks);
-};
+    const newTasks = [...tasks];
+    newTasks.splice(idx, 1);
+    setTasks(newTasks);
+  };
 
   const getTotalXP = () => {
     return tasks.reduce((sum, t) => sum + Number(t.xp_amount || 0), 0);
@@ -109,107 +108,107 @@ function Details() {
 
   const handleSaveTask = async (task) => {
     const totalXP = getTotalXP();
-    
+
     if (!task.task_type) {
       addToast("error", "Select task type");
-    return;
+      return;
     }
 
     if (totalXP > lesson.total_XP) {
-        addToast("error", "Total XP exceeds lesson XP");
-        return;
+      addToast("error", "Total XP exceeds lesson XP");
+      return;
     }
 
-    try{
-        await api.post(`api/adminpanel/lessons/${lesson.id}/tasks`, task);
-        fetchTasks()
+    try {
+      await api.post(`api/adminpanel/lessons/${lesson.id}/tasks`, task);
+      fetchTasks()
     } catch (err) {
-        console.error("Error saving task:", err);
-        addToast("error", "Failed to save task");
-    } 
+      console.error("Error saving task:", err);
+      addToast("error", "Failed to save task");
+    }
   };
 
   const handleUpdateTask = async (task) => {
-  const totalXP = getTotalXP();
+    const totalXP = getTotalXP();
 
-  if (totalXP > lesson.total_XP) {
-    addToast("error", "Total XP exceeds lesson XP");
-    return;
-  }
-
-  try {
-    const originalType = originalTaskTypes[task.id];
-
-    if (task.task_type !== originalType) {
-      const res = await api.get(`api/tasks/${task.id}/answers`);
-
-      if (res.data.length > 0) {
-        addToast(
-          "error",
-          "You must delete existing answers before changing task type"
-        );
-        return; 
-      }
+    if (totalXP > lesson.total_XP) {
+      addToast("error", "Total XP exceeds lesson XP");
+      return;
     }
 
-    await api.patch(
-      `api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`,
-      task
-    );
+    try {
+      const originalType = originalTaskTypes[task.id];
 
-    fetchTasks();
+      if (task.task_type !== originalType) {
+        const res = await api.get(`api/tasks/${task.id}/answers`);
 
-  } catch (err) {
-    console.error("Error saving task:", err);
-    addToast("error", "Failed to save task");
-  }
-};
+        if (res.data.length > 0) {
+          addToast(
+            "error",
+            "You must delete existing answers before changing task type"
+          );
+          return;
+        }
+      }
+
+      await api.patch(
+        `api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`,
+        task
+      );
+
+      fetchTasks();
+
+    } catch (err) {
+      console.error("Error saving task:", err);
+      addToast("error", "Failed to save task");
+    }
+  };
 
   const handleDeleteTask = async (task) => {
-    try{
-        await api.delete(`api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`, task);
-        fetchTasks();
+    try {
+      await api.delete(`api/adminpanel/lessons/${lesson.id}/tasks/${task.id}/change`, task);
+      fetchTasks();
     } catch (err) {
-        console.error("Error deleting task:", err);
-        addToast("error", "Failed to delete task");
-      } 
+      console.error("Error deleting task:", err);
+      addToast("error", "Failed to delete task");
+    }
   };
 
   const fetchLesson = async () => {
-      try {
-        const res = await api.get(`api/adminpanel/lessons/${id}/`);
-        setLesson(res.data);
-      } catch (err) {
-        console.error("Error fetching lessons:", err);
-        addToast("error", "Failed to fetch lesson");
-      }
-    };
-  
+    try {
+      const res = await api.get(`api/adminpanel/lessons/${id}/`);
+      setLesson(res.data);
+    } catch (err) {
+      console.error("Error fetching lessons:", err);
+      addToast("error", "Failed to fetch lesson");
+    }
+  };
+
   const fetchTasks = async () => {
-  try {
-    const res = await api.get(`api/adminpanel/lessons/${id}/tasks`);
-    const sortedTasks = res.data.sort((a,b) => a.sequence_number - b.sequence_number);
+    try {
+      const res = await api.get(`api/adminpanel/lessons/${id}/tasks`);
+      const sortedTasks = res.data.sort((a, b) => a.sequence_number - b.sequence_number);
 
-    setTasks(sortedTasks);
-    setServerTasks(sortedTasks);
+      setTasks(sortedTasks);
+      setServerTasks(sortedTasks);
 
-    const typeMap = {};
-    sortedTasks.forEach(t => {
-      typeMap[t.id] = t.task_type;
-    });
-    setOriginalTaskTypes(typeMap);
+      const typeMap = {};
+      sortedTasks.forEach(t => {
+        typeMap[t.id] = t.task_type;
+      });
+      setOriginalTaskTypes(typeMap);
 
-  } catch(err) {
-    console.error("Error fetching tasks:", err);
-    addToast("error", "Failed to fetch tasks");
-  }
-};
+    } catch (err) {
+      console.error("Error fetching tasks:", err);
+      addToast("error", "Failed to fetch tasks");
+    }
+  };
 
   const fetchTaskTypes = async () => {
-    try{
+    try {
       const res = await api.get(`api/adminpanel/task-types`);
       setTaskTypes(res.data);
-    }catch (err) {
+    } catch (err) {
       console.error("Error fetching task types:", err);
       addToast("error", "Failed to fetch task types");
     }
@@ -221,139 +220,137 @@ function Details() {
     fetchTaskTypes();
   }, [id]);
 
-
   return (
-    <div>
-      <NavBar brand="Jezičko" links={links} onSearch={handleSearch} actions={actions} />
-  
-      <main>
-        <h1 className="heading">Available Lessons</h1>
-  
-        <section className="lessons-container">
-           
-          {lesson && (
-            <div className="lesson-details">
-                    <h2>Detalji lekcije</h2>
+    <div className="admin-body">
+      <NavBar brand="Jezičko Admin" links={links} onSearch={handleSearch} actions={actions} />
 
-                    <div className="lesson-details-grid">
-                    <label>Naziv:</label>
-                    <input className="lesson-details-input" value={lesson.lesson_name} 
-                        onChange={(e) => setLesson({ ...lesson, lesson_name: e.target.value })} 
-                    />
+      <main className="details-main">
+        <h1 className="heading-admin">Lecture Management</h1>
 
-                    <label>Date:</label>
-                    <input className="lesson-details-input" value={lesson.date_created} 
-                        onChange={(e) => setLesson({ ...lesson, date_created: e.target.value })} 
-                    />
+        <section className="lesson-details-card">
+          <h2>Lecture overview</h2>
+          <div className="admin-grid">
+            <label>Naziv:</label>
+            <input className="admin-input" value={lesson.lesson_name}
+              onChange={(e) => setLesson({ ...lesson, lesson_name: e.target.value })}
+            />
 
-                    <label>Total XP:</label>
-                    <input className="lesson-details-input" value={lesson.total_XP} 
-                        onChange={(e) => setLesson({ ...lesson, total_XP: e.target.value })} 
-                    />
+            <label>Date:</label>
+            <input className="admin-input" type="date" value={lesson.date_created}
+              onChange={(e) => setLesson({ ...lesson, date_created: e.target.value })}
+            />
 
-                    <label>Num of exercises:</label>
-                    <input className="lesson-details-input" value={lesson.exercise_num} 
-                        onChange={(e) => setLesson({ ...lesson, exercise_num: e.target.value })} 
-                    />
-                    
-                    <button onClick={handleUpdateLesson} className="detail-button">Izmeni</button>
-                    <button onClick={handleDeleteLesson} className="detail-button">Obriši</button>
-                    </div>
-                </div>
-          )}
+            <label>Total XP:</label>
+            <input className="admin-input" type="number" value={lesson.total_XP}
+              onChange={(e) => setLesson({ ...lesson, total_XP: e.target.value })}
+            />
+
+            <label>Num of exercises:</label>
+            <input className="admin-input" type="number" value={lesson.exercise_num}
+              onChange={(e) => setLesson({ ...lesson, exercise_num: e.target.value })}
+            />
+          </div>
+
+          <div className="admin-btn-row">
+            <button onClick={handleUpdateLesson} className="btn-update">Change lecture</button>
+            <button onClick={handleDeleteLesson} className="btn-delete">Delete lecture</button>
+          </div>
+        </section>
+
+        <div className="tasks-section">
+          <h2 style={{ color: '#54cc04', marginBottom: '20px' }}>Zadaci ({tasks.length}/{lesson.exercise_num})</h2>
+
           {tasks.map((task, idx) => (
             <div key={idx} className="task-card">
-              <div className="task-grid">
-              <label>Task description:</label>
-              <input className="task-input" value={task.task_description}
+              <div className="admin-grid">
+                <label>Description:</label>
+                <input className="task-input" value={task.task_description}
                   onChange={(e) => {
-                  const newTasks = [...tasks];
-                  newTasks[idx].task_description = e.target.value;
-                  setTasks(newTasks);
+                    const newTasks = [...tasks];
+                    newTasks[idx].task_description = e.target.value;
+                    setTasks(newTasks);
                   }}
-                  placeholder="task desciption"/>
-                
-              <label>Question:</label>
-              <input className="task-input" value={task.question}
-                  onChange={(e) => {
-                  const newTasks = [...tasks];
-                  newTasks[idx].question = e.target.value;
-                  setTasks(newTasks);
-                  }}
-                  placeholder="task question"/>
+                />
 
-              <label>Sequence number:</label>
-              <input className="task-input" value={task.sequence_number} readOnly/>
-              
-              <label>Audio:</label>  
-              <select className="task-input" value={task.audio}
+                <label>Question:</label>
+                <input className="task-input" value={task.question}
+                  onChange={(e) => {
+                    const newTasks = [...tasks];
+                    newTasks[idx].question = e.target.value;
+                    setTasks(newTasks);
+                  }}
+                />
+
+                <label>Settings & XP:</label>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <select
+                    className="task-input"
+                    style={{ flex: 1 }}
+                    value={task.audio}
                     onChange={(e) => {
                       const newTasks = [...tasks];
                       newTasks[idx].audio = e.target.value === "true";
                       setTasks(newTasks);
-                    }}>
-                    <option value="false">False</option>
-                    <option value="true">True</option>
-              </select>
+                    }}
+                  >
+                    <option value="false">Audio: No</option>
+                    <option value="true">Audio: Yes</option>
+                  </select>
 
-              <label>Task type:</label>
-              <select className="task-input" value={task.task_type || ""}
+                  <select
+                    className="task-input"
+                    style={{ flex: 2 }}
+                    value={task.task_type || ""}
                     onChange={(e) => {
                       const newTasks = [...tasks];
                       newTasks[idx].task_type = Number(e.target.value);
                       setTasks(newTasks);
-                  }}>
+                    }}
+                  >
+                    <option value="">Select type</option>
+                    {taskTypes.map(type => (
+                      <option key={type.id} value={type.id}>{type.name}</option>
+                    ))}
+                  </select>
 
-                  <option value="">Select type</option>
-                  {taskTypes.map(type => (
-                    <option key={type.id} value={type.id}>
-                      {type.name}
-                    </option>
-                  ))}
-              </select>
-
-              <label>XP:</label>
-              <input className="task-input" value={task.xp_amount}
-                  onChange={(e) => {
-                  const newTasks = [...tasks];
-                  newTasks[idx].xp_amount = e.target.value;
-                  setTasks(newTasks);
-                  }}
-                  placeholder="amount of XP that the task gives"/>
-
-              <button 
-                onClick={() => handleUpdateTask(task)} 
-                disabled={task.isNew}
-                className="task-button"
-              >
-                Izmeni
-              </button>
-              <button onClick={() => handleDeleteTask(task)} className="task-button">Obriši</button>
-
-              {task.isNew && (
-              <>
-              <button onClick={() => handleSaveTask(task, idx)} className="task-button">
-                Zavrsi
-              </button>
-              <button onClick={() => handleCancelTask(idx)} className="task-button"
-              style={{backgroundColor: "gray"}}>
-                Otkaži
-              </button>
-              </>
-              )}
+                  <input
+                    className="task-input"
+                    style={{ flex: 1 }}
+                    type="number"
+                    placeholder="XP"
+                    value={task.xp_amount}
+                    onChange={(e) => {
+                      const newTasks = [...tasks];
+                      newTasks[idx].xp_amount = e.target.value;
+                      setTasks(newTasks);
+                    }}
+                  />
+                </div>
               </div>
+
+              <div className="admin-btn-row">
+                <button onClick={() => handleUpdateTask(task)} disabled={task.isNew} className="btn-update">Change</button>
+                <button onClick={() => handleDeleteTask(task)} className="btn-delete">Obriši</button>
+
+                {task.isNew && (
+                  <button onClick={() => handleSaveTask(task)} className="btn-update" style={{ backgroundColor: '#fff' }}>Finish</button>
+                )}
+              </div>
+
               {task.id && (
-                <AdminAnswerEditor task={task} />
+                <div className="answer-editor-section">
+                  <AdminAnswerEditor task={task} />
+                </div>
               )}
             </div>
           ))}
+
           {!tasks.some(t => t.isNew) && (
-            <button onClick={handleAddTask}>
-              Dodaj zadatak
+            <button onClick={handleAddTask} className="btn-add-task">
+              + ADD NEW EXERCISE
             </button>
           )}
-
-        </section>
+        </div>
       </main>
     </div>
   );

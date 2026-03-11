@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import api from "../api";
-import "../styles/Lesson.css";
-import "../styles/Task.css";
+import "../styles/Start.css"; 
 import { useToast } from "../components/ToastProvider.jsx";
 
 const shuffleArray = (array) => {
@@ -25,8 +24,8 @@ function Start() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const [userAnswer, setUserAnswer] = useState(""); 
-  const [taskOptions, setTaskOptions] = useState([]); 
+  const [userAnswer, setUserAnswer] = useState("");
+  const [taskOptions, setTaskOptions] = useState([]);
 
   const [leftColumn, setLeftColumn] = useState([]);
   const [rightColumn, setRightColumn] = useState([]);
@@ -60,7 +59,6 @@ function Start() {
     };
 
     fetchInitialData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
@@ -71,17 +69,17 @@ function Start() {
       const fetchTaskOptions = async () => {
         try {
           const res = await api.get(`api/tasks/${currentTask.id}/answers/`);
-          
+
           if (taskType === "multiple_choice") {
             setTaskOptions(res.data);
           } else if (taskType === "matching") {
             const keys = res.data.map(opt => opt.match_key).filter(Boolean);
             const values = res.data.map(opt => opt.match_value).filter(Boolean);
-            
+
             setLeftColumn(shuffleArray(keys));
             setRightColumn(shuffleArray(values));
-            
-            setUserPairs([]); 
+
+            setUserPairs([]);
             setSelectedLeft(null);
             setSelectedRight(null);
           }
@@ -94,10 +92,9 @@ function Start() {
       if (taskType === "multiple_choice" || taskType === "matching") {
         fetchTaskOptions();
       } else {
-        setTaskOptions([]); 
+        setTaskOptions([]);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, tasks]);
 
   const handleMatchClick = (side, text) => {
@@ -131,7 +128,7 @@ function Start() {
   const handleAnswerSubmit = async (selectedId = null) => {
     const currentTask = tasks[currentIndex];
     const taskType = currentTask.task_type_name?.toLowerCase();
-    
+
     let payload = {};
 
     if (taskType === "multiple_choice") {
@@ -154,30 +151,26 @@ function Start() {
       return;
     }
 
-    console.log("=== SUBMITTING PAYLOAD ===");
-    console.log("Task Type:", taskType);
-    console.log("Payload:", JSON.stringify(payload, null, 2));
-    
     try {
       const res = await api.post(`api/tasks/${currentTask.id}/submit/`, payload);
 
       if (res.data.correct) {
         addToast("success", `Correct! +${currentTask.xp_amount} XP.`);
-        
+
         if (currentIndex + 1 < tasks.length) {
           setCurrentIndex(currentIndex + 1);
-          setUserAnswer(""); 
+          setUserAnswer("");
         } else {
           const finishRes = await api.post(`api/lessons/${id}/finish/`);
           addToast("success", `Lesson Complete! Total XP earned: ${finishRes.data.xp}`);
-          navigate("/home"); 
+          navigate("/home");
         }
       } else {
         addToast("error", "Incorrect answer. Try again!");
         if (taskType === "matching") {
-            setUserPairs([]);
-            setSelectedLeft(null);
-            setSelectedRight(null);
+          setUserPairs([]);
+          setSelectedLeft(null);
+          setSelectedRight(null);
         }
       }
     } catch (err) {
@@ -192,14 +185,14 @@ function Start() {
       const res = await api.get(`api/user/lesson/task/${task.id}/answer/`);
       const answer = res.data.text;
       const question = task.question;
-      
+
       let finalSentence = question;
       if (question.includes("_")) {
         finalSentence = question.replace(/_+/g, answer);
       } else {
         finalSentence = question.replace(question, answer);
       }
-      
+
       speech.text = finalSentence;
       window.speechSynthesis.speak(speech);
     } catch (err) {
@@ -217,14 +210,14 @@ function Start() {
     navigate("/login");
   };
 
-  if (loading) return <div className="header-section"><h1 className="heading" style={{color: "white"}}>LOADING...</h1></div>;
+  if (loading) return <div className="start-body"><h1 className="heading" style={{ color: "white", textAlign:"center", marginTop:"50px" }}>LOADING...</h1></div>;
   if (!tasks || tasks.length === 0) {
     return (
-        <div className="header-section" style={{textAlign: "center", marginTop: "50px"}}>
-            <h1 className="heading" style={{color: "white"}}>NO EXERCISES FOUND</h1>
-            <p style={{color: "#aaa", marginTop: "20px"}}>Check Django Admin to add tasks to this lesson.</p>
-            <button onClick={() => navigate("/home")} className="form-submit-btn" style={{marginTop: "20px"}}>Back Home</button>
-        </div>
+      <div className="start-body" style={{ textAlign: "center", paddingTop: "50px" }}>
+        <h1 className="heading" style={{ color: "white" }}>NO EXERCISES FOUND</h1>
+        <p style={{ color: "#aaa", marginTop: "20px" }}>Check Django Admin to add tasks to this lesson.</p>
+        <button onClick={() => navigate("/home")} className="check-answer-btn">Back Home</button>
+      </div>
     );
   }
 
@@ -232,144 +225,109 @@ function Start() {
   const actions = <button onClick={handleLogout} className="navbar-btn">Logout</button>;
 
   return (
-    <div>
+    <div className="start-body">
       <NavBar brand="Jezičko" links={links} actions={actions} />
       
-      <main>
+      <main className="start-container">
         {lesson && (
-          <div className="header-section" style={{ textAlign: "center", marginBottom: "30px" }}>
-            <h1 className="heading" style={{ color: "#54cc04" }}>{lesson.lesson_name}</h1>
-            <h3 style={{ color: "white" }}>Total Reward: {lesson.total_XP} XP</h3>
+          <div style={{ textAlign: "center", width: "100%" }}>
+            <h1 className="heading" style={{margin: "0 auto 10px auto"}}>{lesson.lesson_name}</h1>
+            <h3 style={{ color: "white", marginBottom: "30px", fontSize:"1.2rem" }}>Reward: <span style={{color:"#54cc04"}}>{lesson.total_XP} XP</span></h3>
           </div>
         )}
 
-        <section className="lessons-container" style={{ display: 'flex', justifyContent: 'center' }}>
-          <div className="task-card" style={{ maxWidth: '600px', width: '100%', padding: '30px', backgroundColor: '#1a1a1a', borderRadius: '10px' }}>
-            
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
-              <span style={{ color: '#aaa', fontSize: '1.1rem' }}>Exercise {currentIndex + 1} of {tasks.length}</span>
-              <span style={{ color: '#54cc04', fontWeight: 'bold', fontSize: '1.1rem' }}>+{currentTask.xp_amount} XP</span>
-            </div>
+        <section className="exercise-card">
+          <div className="exercise-header">
+            <span className="exercise-number">Exercise {currentIndex + 1} of {tasks.length}</span>
+            <span className="exercise-xp-badge">+{currentTask.xp_amount} XP</span>
+          </div>
 
-            <div className="task-grid" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-              
-              <h3 style={{ marginBottom: "15px", color: "#aaa", textTransform: "uppercase", letterSpacing: "1px", fontSize: "0.9rem" }}>
-                {currentTask.task_description}
-              </h3>
-              
-              {currentTask.question && (
-                <h2 style={{ marginBottom: "30px", color: "white", fontSize: "1.8rem" }}>
-                  {currentTask.question}
-                </h2>
-              )}
+          <div style={{ textAlign: "center", width: "100%" }}>
+            <p className="task-instruction">{currentTask.task_description}</p>
+            <h2 className="task-question">{currentTask.question}</h2>
 
-              <div className="answer-section" style={{ width: "100%", marginBottom: "30px" }}>
-                
-                {currentTask.task_type_name?.toLowerCase() === "multiple_choice" ? (
-                  <div style={{ display: "grid", gap: "15px", gridTemplateColumns: "1fr 1fr", width: "100%" }}>
-                    {taskOptions.length > 0 ? (
-                      taskOptions.map((opt) => (
-                        <button 
-                          key={opt.id} 
-                          className="form-submit-btn" 
-                          onClick={() => handleAnswerSubmit(opt.id)}
-                          style={{ padding: "15px", fontSize: "1.1rem" }}
-                        >
-                          {opt.text}
-                        </button>
-                      ))
-                    ) : (
-                      <p style={{ color: "#54cc04" }}>Loading options...</p>
-                    )}
-                  </div>
-                
-                ) : currentTask.task_type_name?.toLowerCase() === "text" ? (
-                  <input 
-                    className="lesson-details-input" 
+            <div className="answer-section">
+              {currentTask.task_type_name?.toLowerCase() === "multiple_choice" ? (
+                <div className="matching-grid">
+                  {taskOptions.map((opt) => (
+                    <button 
+                      key={opt.id} 
+                      className="match-button" 
+                      onClick={() => handleAnswerSubmit(opt.id)}
+                    >
+                      {opt.text}
+                    </button>
+                  ))}
+                </div>
+
+              ) : currentTask.task_type_name?.toLowerCase() === "text" ? (
+                <div style={{display:"flex", justifyContent:"center", marginBottom:"30px"}}>
+                   <input 
+                    className="match-button" 
+                    style={{ width: "100%", maxWidth: "400px", textAlign: "center", fontSize: "1.2rem", color:"white", cursor:"text" }}
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
-                    placeholder="Type your answer here..."
+                    placeholder="Kucaj ovde..."
                     onKeyDown={(e) => e.key === 'Enter' && handleAnswerSubmit()}
                     autoFocus
-                    style={{ width: "100%", padding: "15px", fontSize: "1.1rem", textAlign: "center" }}
                   />
-                
-                ) : currentTask.task_type_name?.toLowerCase() === "matching" ? (
-                  <div style={{ display: "flex", flexDirection: "column", width: "100%", gap: "20px" }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", width: "100%" }}>
-                      
-                      <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                        {leftColumn.map((keyText, i) => {
-                          const isPaired = userPairs.some(p => p.key === keyText);
-                          const isSelected = selectedLeft === keyText;
-                          return (
-                            <button 
-                              key={`left-${i}`}
-                              onClick={() => handleMatchClick("left", keyText)}
-                              disabled={isPaired}
-                              style={{
-                                padding: "15px", fontSize: "1.1rem", borderRadius: "8px",
-                                border: isSelected ? "2px solid #fff" : "2px solid #54cc04",
-                                backgroundColor: isPaired ? "#333" : isSelected ? "#54cc04" : "transparent",
-                                color: isPaired ? "#666" : isSelected ? "#000" : "#54cc04",
-                                cursor: isPaired ? "default" : "pointer", transition: "all 0.2s"
-                              }}
-                            >
-                              {keyText}
-                            </button>
-                          );
-                        })}
-                      </div>
+                </div>
 
-                      <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                        {rightColumn.map((valText, i) => {
-                          const isPaired = userPairs.some(p => p.value === valText);
-                          const isSelected = selectedRight === valText;
-                          return (
-                            <button 
-                              key={`right-${i}`}
-                              onClick={() => handleMatchClick("right", valText)}
-                              disabled={isPaired}
-                              style={{
-                                padding: "15px", fontSize: "1.1rem", borderRadius: "8px",
-                                border: isSelected ? "2px solid #fff" : "2px solid #54cc04",
-                                backgroundColor: isPaired ? "#333" : isSelected ? "#54cc04" : "transparent",
-                                color: isPaired ? "#666" : isSelected ? "#000" : "#54cc04",
-                                cursor: isPaired ? "default" : "pointer", transition: "all 0.2s"
-                              }}
-                            >
-                              {valText}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
+              ) : currentTask.task_type_name?.toLowerCase() === "matching" ? (
+                <div className="matching-grid">
+                  <div className="matching-column">
+                    {leftColumn.map((keyText, i) => {
+                      const isPaired = userPairs.some(p => p.key === keyText);
+                      const isSelected = selectedLeft === keyText;
+                      return (
+                        <button 
+                          key={`left-${i}`}
+                          className={`match-button ${isSelected ? 'selected' : ''} ${isPaired ? 'paired' : ''}`}
+                          onClick={() => handleMatchClick("left", keyText)}
+                          disabled={isPaired}
+                        >
+                          {keyText}
+                        </button>
+                      );
+                    })}
                   </div>
-                ) : (
-                  <p style={{ color: "red" }}>Unknown task type: {currentTask.task_type_name}</p>
-                )}
-              </div>
 
+                  <div className="matching-column">
+                    {rightColumn.map((valText, i) => {
+                      const isPaired = userPairs.some(p => p.value === valText);
+                      const isSelected = selectedRight === valText;
+                      return (
+                        <button 
+                          key={`right-${i}`}
+                          className={`match-button ${isSelected ? 'selected' : ''} ${isPaired ? 'paired' : ''}`}
+                          onClick={() => handleMatchClick("right", valText)}
+                          disabled={isPaired}
+                        >
+                          {valText}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "15px", marginTop:"20px"}}>
               {currentTask.audio && (
                 <button 
                   onClick={() => handleListen(currentTask)} 
-                  className="form-submit-btn" 
-                  style={{ width: "100%", maxWidth: "300px", marginBottom: "15px", backgroundColor: "transparent", border: "2px solid #54cc04", color: "white" }}
+                  className="match-button"
+                  style={{ padding: "10px 40px" }}
                 >
                   🔊 Listen
                 </button>
               )}
-
+              
               {(currentTask.task_type_name?.toLowerCase() === "text" || currentTask.task_type_name?.toLowerCase() === "matching") && (
-                <button 
-                  onClick={() => handleAnswerSubmit()} 
-                  className="form-submit-btn" 
-                  style={{ width: "100%", maxWidth: "300px", padding: "15px", fontSize: "1.1rem" }}
-                >
+                <button onClick={() => handleAnswerSubmit()} className="check-answer-btn">
                   Check Answer
                 </button>
               )}
-
             </div>
           </div>
         </section>

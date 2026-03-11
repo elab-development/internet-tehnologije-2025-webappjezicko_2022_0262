@@ -19,46 +19,60 @@ function MultipleChoiceForm({ taskId }) {
     };
 
     const saveAnswers = async () => {
-        await api.post(`/api/tasks/${taskId}/answers/`, {
-            answers: answers
-        });
-
-        alert("Sacuvano!");
+        try {
+            await api.post(`/api/tasks/${taskId}/answers/`, {
+                answers: answers
+            });
+            alert("Sačuvano!");
+        } catch (err) {
+            console.error(err);
+            alert("Greška pri čuvanju");
+        }
     };
 
     return (
-        <>
-            <h3>Odgovori</h3>
+        <div className="multiple-choice-editor">
+            <h3>Opcije odgovora</h3>
 
             {answers.map((a, i) => (
-                <div key={i}>
+                <div key={i} className="admin-btn-row" style={{ alignItems: 'center', marginBottom: '10px' }}>
                     <input
+                        className="task-input"
+                        style={{ flex: 3 }}
                         value={a.text}
                         onChange={(e) =>
                             updateAnswer(i, "text", e.target.value)
                         }
-                        placeholder="Odgovor"
+                        placeholder="Upiši odgovor..."
                     />
 
-                    <input
-                        type="checkbox"
-                        checked={a.is_correct}
-                        onChange={(e) =>
-                            updateAnswer(i, "is_correct", e.target.checked)
-                        }
-                    />
-                    Tacan
+                    <label style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '10px', color: '#54cc04', fontWeight: 'bold', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={a.is_correct}
+                            onChange={(e) =>
+                                updateAnswer(i, "is_correct", e.target.checked)
+                            }
+                        />
+                        Tačan
+                    </label>
                 </div>
             ))}
 
-            <button onClick={addAnswer}>
-                Dodaj odgovor
-            </button>
+            <div className="admin-btn-row">
+                <button 
+                    onClick={addAnswer} 
+                    className="btn-delete" 
+                    style={{ borderColor: '#54cc04', color: '#54cc04' }}
+                >
+                    + Dodaj opciju
+                </button>
 
-            <button onClick={saveAnswers}>
-                Sacuvaj
-            </button>
-        </>
+                <button onClick={saveAnswers} className="btn-update">
+                    Sačuvaj sve
+                </button>
+            </div>
+        </div>
     );
 }
 

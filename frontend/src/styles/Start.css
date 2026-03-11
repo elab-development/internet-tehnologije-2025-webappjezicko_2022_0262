@@ -1,0 +1,127 @@
+.start-body {
+    background-color: #05050a;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.start-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exercise-card {
+    background-color: #0e0c14;
+    border: 2px solid #54cc04;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    box-shadow: 0px 0px 30px rgba(84, 204, 4, 0.15);
+    margin-top: 20px;
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.exercise-number {
+    color: #aaa;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.exercise-xp-badge {
+    color: #54cc04;
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.task-instruction {
+    color: #54cc04;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.task-question {
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.matching-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.matching-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Stil za Matching dugmiće */
+.match-button {
+    background-color: transparent;
+    color: #54cc04;
+    border: 2px solid #54cc04;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.match-button:hover:not(:disabled) {
+    background-color: rgba(84, 204, 4, 0.1);
+    transform: scale(1.02);
+}
+
+.match-button.selected {
+    background-color: #54cc04;
+    color: #0e0c14;
+    box-shadow: 0px 0px 15px #54cc04;
+}
+
+.match-button.paired {
+    border-color: #333;
+    color: #333;
+    cursor: default;
+    background-color: #1a1a1a;
+}
+
+.check-answer-btn {
+    background-color: #54cc04;
+    color: #0e0c14;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 40px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+    max-width: 300px;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.check-answer-btn:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+}

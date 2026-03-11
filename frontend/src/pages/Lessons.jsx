@@ -75,27 +75,26 @@ function Lessons() {
   return (
     <div>
       <NavBar brand="Jezičko" links={links} onSearch={handleSearch} actions={actions} />
-  
+
       <main>
         <h1 className="heading">Available Lessons</h1>
-  
+
         <section className="lessons-container">
-          {lessons.length === 0 && <p>No lessons available.</p>}
-  
+          {lessons.length === 0 && <p style={{color: "white"}}>No lessons available at the moment.</p>}
+
           {lessons.map((lesson) => (
-            <div
-              key={lesson.id}
-              className="lesson-card"
-            >
+            <div key={lesson.id} className="lesson-card">
               <h3>{lesson.lesson_name}</h3>
-              <p>Start: {lesson.date_created}</p>
-              <p>XP: {lesson.total_XP}</p>
+
+              <p>Start: <strong>{lesson.date_created}</strong></p>
+              <p>XP: <strong>{lesson.total_XP}</strong></p>
+              
               <button
                 onClick={() => handleEnroll(lesson.id)}
                 disabled={enrolledIds.includes(lesson.id)}
-                className="details-button"
+                className="detail-button"
               >
-                {enrolledIds.includes(lesson.id) ? "Enrolled" : "Enroll"}
+                {enrolledIds.includes(lesson.id) ? "Enrolled ✓" : "Enroll Now"}
               </button>
             </div>
           ))}
